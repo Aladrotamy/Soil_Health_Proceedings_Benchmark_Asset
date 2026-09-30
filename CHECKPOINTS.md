@@ -63,3 +63,35 @@ Build sequence used for every milestone: `pdflatex main` → `biber main` → `m
 | C2.10 | Chapters of the main matter labelled "Paper" | "Paper 1" to "Paper 6" | PASS |
 | C2.11 | Each paper has an abstract and keywords | 6 of 6 | PASS |
 | C2.12 | Text files stored with LF line endings | 0 CRLF files | PASS (0) |
+
+
+## M3 — Data Layer and Methods
+
+**Status:** Complete
+**Snapshot:** `milestone_3_data_methods/`
+**Toolchain:** MiKTeX 26.5 (pdfTeX 4.27), biber 2.22, makeindex, Python 3.12 (standard library only)
+
+### Work completed
+- Added the seeded data generator `tools/make_trials.py` (default seed 20261001, 4 blocks; options `--seed`, `--blocks`, `--out`). It writes `data/sites.tsv` (3 fictional sites in temperate, semi-arid and humid tropical zones) and six files in `data/trials/`: one per trial (T1–T5) and `plot_register.tsv`, which lists every plot of every trial. Output uses LF line endings and fixed decimal places, so it is byte-identical on any operating system.
+- Wrote out the 13 data rules with their exact conditions in `notes/data_rules.md`, and added `tools/check_data.py`, which checks every rule, reports violations per rule and exits with status 1 if any rule fails.
+- Added a Materials and Methods section to each of the six papers, as separate files in `papers/methods/`, with 15 numbered equations: indicator scoring and the soil health index (Paper 1); quadratic-plateau response, agronomic efficiency and recovery efficiency (Paper 2); partial and total land equivalent ratio (Paper 3); change in soil organic carbon and the factorial model (Paper 4); carbon stock and carbon retention (Paper 5); block-design model, least significant difference and combined-site model (Paper 6).
+- Added `tables/` with the sites table, typeset directly from `data/sites.tsv` with pgfplotstable, and the indicator scoring table. File paths inside papers are written relative to `papers/` and wrapped in `\subfix`, so they resolve both in the volume and when a paper is typeset alone.
+- A first version of the sites table overran the text block (Overfull \hbox, 46.1 pt too wide); the table was narrowed before commit. This defect is recorded as a candidate planted defect for M6.
+
+### Pass/fail checks
+| ID | Check | Threshold | Result |
+|---|---|---|---|
+| C3.1 | Full build of `main.tex` completes | 0 errors; biber and makeindex exit normally | PASS |
+| C3.2 | Warnings and bad boxes in `main.log` | exactly 0 matches for `^!`, `Warning:`, `Overfull`, `Underfull` | PASS (0) |
+| C3.3 | Compiled page count of the volume | exactly 28 | PASS (28) |
+| C3.4 | Each paper typeset on its own | 6 of 6 with 0 issues; pages 3, 3, 2, 2, 3, 3 | PASS (6/6) |
+| C3.5 | Data rules R1–R13 on the committed data | 13 of 13 PASS; 0 violations | PASS (0) |
+| C3.6 | Rows per data file (4 blocks) | sites 3; T1 36; T2 60; T3 36; T4 48; T5 48; register 228 | PASS |
+| C3.7 | Reproducibility: regenerating with the default seed gives identical files | SHA-256 prefixes identical on Linux and on Windows (MiKTeX machine): sites `350f855fd546`, register `668c940f92f4`, T1 `b93b68b5a067`, T2 `714beec3ce7b`, T3 `148ae9ca7fd3`, T4 `6c6e1eaa1c96`, T5 `b13bbf8d62cf` | PASS (7/7) |
+| C3.8 | Generator robustness across seeds and block counts | 40 of 40 combinations (10 seeds × 3–6 blocks) pass all 13 rules | PASS (40/40) |
+| C3.9 | Checker detects planted errors | a fertilised yield set below its control fails R7; a CR line ending and a short row fail R13 | PASS |
+| C3.10 | Methods files in `papers/methods/`, each input once by its paper | exactly 6 | PASS (6) |
+| C3.11 | Numbered equations in the methods | exactly 15, each with an `eq:` label | PASS (15) |
+| C3.12 | Each methods section names its data file | 6 of 6 | PASS (6/6) |
+| C3.13 | Sites table typeset from `data/sites.tsv` | 3 rows; values identical to the data file | PASS |
+| C3.14 | Text files stored with LF line endings | 0 CRLF files | PASS (0) |

@@ -1,0 +1,48 @@
+% paper2_methods.tex -- Materials and Methods of Paper 2, input by
+% papers/paper2_nitrogen.tex.
+\section{Materials and Methods}
+
+\subsection{Treatments and design}
+Maize received five rates of mineral nitrogen, 0, 40, 80, 120 and
+\SI{160}{\kilo\gram\per\hectare}, applied as urea in two equal splits at
+sowing and at the six-leaf stage. Phosphorus and potassium were applied to all
+plots at rates that did not limit growth. The rates were arranged in
+randomised complete blocks with four blocks at each of the three sites
+\parencite{gomez1984}. Grain yield is expressed in \si{\tonne\per\hectare} on a
+dry-matter basis, and nitrogen uptake as the nitrogen in grain and stover at
+harvest. The data are held in \texttt{data/trials/t2\_nitrogen.tsv}.
+
+\subsection{Yield response}
+The response of grain yield $Y$ to the nitrogen rate $N$ was described by a
+quadratic-plateau function,
+\begin{equation}
+  Y =
+  \begin{cases}
+    a + bN + cN^2 & N < N_p,\\
+    Y_p & N \ge N_p,
+  \end{cases}
+  \qquad N_p = -\frac{b}{2c},
+  \label{eq:quadplateau}
+\end{equation}
+where $a$, $b$ and $c$ are fitted coefficients ($c < 0$), $N_p$ is the rate at
+which the response reaches its plateau and $Y_p$ is the plateau yield. $N_p$ is
+taken as the agronomic optimum rate.
+
+\subsection{Nitrogen use efficiency}
+Two efficiency measures were calculated for each fertilised plot against the
+unfertilised plot of the same block \parencite{cassman2002,ladha2005}. The
+agronomic efficiency of applied nitrogen, in kilograms of grain per kilogram of
+nitrogen, is
+\begin{equation}
+  \mathrm{AE}_N = \frac{1000\,(Y_N - Y_0)}{N},
+  \label{eq:ae}
+\end{equation}
+where $Y_N$ and $Y_0$ are the grain yields (\si{\tonne\per\hectare}) with and
+without nitrogen. The apparent recovery efficiency, the fraction of the applied
+nitrogen taken up by the crop, is
+\begin{equation}
+  \mathrm{RE}_N = \frac{U_N - U_0}{N},
+  \label{eq:re}
+\end{equation}
+where $U_N$ and $U_0$ are the nitrogen uptakes (\si{\kilo\gram\per\hectare})
+with and without nitrogen.

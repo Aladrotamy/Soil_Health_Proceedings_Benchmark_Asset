@@ -1,0 +1,25 @@
+% scoring.tex -- Scoring parameters of the six soil health indicators
+% (Paper 1). These are method settings, not data, so they are written here
+% rather than read from a data file.
+\begin{table}[htbp]
+  \centering\small
+  \caption{Indicators of the minimum dataset, their laboratory methods and
+    scoring parameters. For \emph{more is better} indicators the score rises
+    from 0 at the lower limit $L$ to 1 at the upper limit $U$; for
+    \emph{less is better} it falls from 1 at $L$ to 0 at $U$; for
+    \emph{optimum range} it is 1 between $O_1$ and $O_2$ and falls to 0 at $L$
+    and $U$.}
+  \label{tab:scoring}
+  \begin{tabular}{@{}llllrrrr@{}}
+    \toprule
+    Indicator & Unit & Method & Curve & $L$ & $O_1$ & $O_2$ & $U$ \\
+    \midrule
+    SOC   & \si{\gram\per\kilo\gram}          & wet oxidation     & more is better & 5    &      &      & 25   \\
+    pH    & --                                & water, 1:2.5      & optimum range  & 4.5  & 6.0  & 7.0  & 8.5  \\
+    P     & \si{\milli\gram\per\kilo\gram}    & Mehlich~3         & more is better & 5    &      &      & 40   \\
+    BD    & \si{\gram\per\centi\metre\cubed}  & core method       & less is better & 1.10 &      &      & 1.60 \\
+    WSA   & \%                                & wet sieving       & more is better & 20   &      &      & 70   \\
+    MBC   & \si{\milli\gram\per\kilo\gram}    & fumigation--extraction & more is better & 50 &   &      & 300  \\
+    \bottomrule
+  \end{tabular}
+\end{table}
