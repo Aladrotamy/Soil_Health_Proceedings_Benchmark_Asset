@@ -1,0 +1,21 @@
+% main.tex -- master file of the proceedings volume.
+% Build: pdflatex main; biber main; makeindex main; pdflatex main; pdflatex main
+\documentclass[11pt,a4paper,twoside,openright]{book}
+\usepackage{soilproc}
+
+\begin{document}
+
+\frontmatter
+\input{frontmatter/titlepage}
+\input{frontmatter/imprint}
+\tableofcontents
+\input{frontmatter/preface}
+\input{frontmatter/organisation}
+
+\mainmatter
+% Papers are added from Milestone 2 onwards.
+
+\backmatter
+% List of abbreviations and subject index are added in later milestones.
+
+\end{document}
