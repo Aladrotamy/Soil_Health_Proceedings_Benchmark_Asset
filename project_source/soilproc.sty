@@ -10,9 +10,14 @@
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{lmodern}
 \RequirePackage[british]{babel}
+\addto\captionsbritish{\renewcommand{\chaptername}{Paper}}% each chapter is a contributed paper
 \RequirePackage{microtype}
 \RequirePackage[autostyle]{csquotes}
 \setlength{\emergencystretch}{2em}
+
+% ---------------------------------------------------------------- separate papers
+% Loaded early so that \subfix is available for file paths below.
+\RequirePackage{subfiles}
 
 % ---------------------------------------------------------------- tables, units, figures
 \RequirePackage{booktabs}
@@ -42,7 +47,9 @@
 
 % ---------------------------------------------------------------- bibliography (biber)
 \RequirePackage[backend=biber,style=authoryear,maxcitenames=2,uniquename=false,
-  uniquelist=false,giveninits=true,dashed=false,doi=true,url=false,isbn=false]{biblatex}
+  uniquelist=false,giveninits=true,useprefix=true,dashed=false,doi=true,url=true,isbn=false]{biblatex}
+\addbibresource{\subfix{bib/soilhealth.bib}}
+\defbibheading{paperrefs}{\section*{References}}
 
 % ---------------------------------------------------------------- subject index (makeindex)
 % noautomatic: makeindex is run as its own build step, so the build is the
@@ -56,7 +63,28 @@
   pdfauthor={\volumeeditor\space (ed.)},
   pdfsubject={Soil health and sustainable crop production}}
 
-% ---------------------------------------------------------------- separate papers
-\RequirePackage{subfiles}
+% ---------------------------------------------------------------- paper layout
+% \begin{paper}{Full title}{Short title for the running head}
+%   \begin{paperabstract} ... \end{paperabstract}
+%   \paperkeywords{...}
+%   ... sections ...
+% \end{paper}
+% Each paper is one chapter with its own reference section, so its list of
+% references contains only the works that paper cites.
+\newenvironment{paper}[2]{%
+  \chapter{#1}\markboth{#2}{#2}%
+  \noindent{\small\itshape Contributed paper}\par\medskip
+  \begin{refsection}%
+}{%
+  \printbibliography[heading=paperrefs]%
+  \end{refsection}%
+}
+\newenvironment{paperabstract}{%
+  \begin{quote}\small\noindent\textbf{Abstract.}\ \ignorespaces
+}{%
+  \end{quote}%
+}
+\newcommand{\paperkeywords}[1]{%
+  \begin{quote}\small\noindent\textbf{Keywords:}\ #1\end{quote}\medskip}
 
 \endinput

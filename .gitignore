@@ -22,3 +22,4 @@
 *.fls
 *.fdb_latexmk
 __pycache__/
+**/papers/*.pdf
