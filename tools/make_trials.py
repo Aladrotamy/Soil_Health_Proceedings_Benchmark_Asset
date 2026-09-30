@@ -107,7 +107,7 @@ def main():
     for s in SITES:
         sid = s[0]
         ymax, y0, nopt = MAIZE[sid]
-        block_eff = {b: g(0, 0.15) for b in blocks}
+        block_eff = {b: g(0, 0.25) for b in blocks}
         trt = [f"N{n:03d}" for n in N_RATES]
         recs = plots("T2", sid, trt)
         base = {}
@@ -115,7 +115,7 @@ def main():
             n = int(t[1:])
             x = min(n, nopt)
             y = y0 + (ymax - y0) * (2 * x / nopt - (x / nopt) ** 2)
-            y = y + block_eff[b] + g(0, 0.12)
+            y = y + block_eff[b] + g(0, 0.35)
             if n == 0:
                 base[b] = y
             rows.append([pid, sid, b, n, y])
@@ -171,7 +171,7 @@ def main():
             ypen = -0.09 if (till == "NT" and res == "R0") else (-0.03 if till == "NT" else 0)
             if dry and t == "NT-R1":
                 ypen = 0.07
-            y = ybase * (1 + ypen + (0.02 if res == "R1" else 0) + g(0, 0.035))
+            y = ybase * (1 + ypen + (0.02 if res == "R1" else 0) + g(0, 0.06))
             rows.append((pid, sid, b, till, res, rnd(si, 1), rnd(sf, 1), rnd(y, 2)))
     write_tsv(os.path.join(out, "trials", "t4_tillage.tsv"),
               ["plot_id", "site", "block", "tillage", "residue", "soc_initial_gkg",
