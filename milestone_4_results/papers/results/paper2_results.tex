@@ -1,0 +1,34 @@
+% paper2_results.tex -- Results of Paper 2, input by papers/paper2_nitrogen.tex.
+% Every number is quoted from results/values.tex with \res{...}.
+\section{Results}
+
+\subsection{Yield response}
+Grain yield increased with the nitrogen rate at all three sites
+(Table~\ref{tab:p2response}). Without nitrogen, mean yield was
+\res{p2-yield-S1-N0}, \res{p2-yield-S2-N0} and
+\res{p2-yield-S3-N0}~\si{\tonne\per\hectare} at S1, S2 and S3; at
+\SI{120}{\kilo\gram\per\hectare} it reached \res{p2-yield-S1-N120},
+\res{p2-yield-S2-N120} and \res{p2-yield-S3-N120}~\si{\tonne\per\hectare}, and
+the highest rate added little or nothing further.
+
+\input{\subfix{../tables/p2_response}}
+
+The quadratic-plateau function described the response well, with coefficients
+of determination of \res{p2-rsq-S1}, \res{p2-rsq-S2} and \res{p2-rsq-S3}
+(Figure~\ref{fig:p2yield}). The agronomic optimum rate was
+\res{p2-nopt-S1}~\si{\kilo\gram\per\hectare} at S1,
+\res{p2-nopt-S2}~\si{\kilo\gram\per\hectare} at S2 and
+\res{p2-nopt-S3}~\si{\kilo\gram\per\hectare} at S3, with plateau yields of
+\res{p2-yplat-S1}, \res{p2-yplat-S2} and
+\res{p2-yplat-S3}~\si{\tonne\per\hectare}.
+
+\input{\subfix{../figures/fig2_yield}}
+
+\subsection{Nitrogen use efficiency}
+Agronomic efficiency was highest at the lowest rate and declined as the rate
+increased. At \SI{40}{\kilo\gram\per\hectare} each kilogram of nitrogen
+produced \res{p2-ae40-S1}, \res{p2-ae40-S2} and \res{p2-ae40-S3}~\si{\kilo\gram}
+of additional grain at S1, S2 and S3; at \SI{160}{\kilo\gram\per\hectare} the
+corresponding values fell to \res{p2-ae160-S1}, \res{p2-ae160-S2} and
+\res{p2-ae160-S3}~\si{\kilo\gram}. The apparent recovery of nitrogen followed
+the same pattern (Table~\ref{tab:p2response}).

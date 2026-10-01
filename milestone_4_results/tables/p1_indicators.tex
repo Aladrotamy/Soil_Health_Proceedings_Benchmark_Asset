@@ -1,0 +1,25 @@
+% p1_indicators.tex -- Paper 1: mean indicator values and soil health index,
+% read from results/p1_indicators.tsv (written by tools/compute_results.py).
+\begin{table}[htbp]
+  \centering\small
+  \caption{Mean values of the six indicators and the soil health index (SHI) by
+    site and management system (four blocks). SOC and MBC in
+    \si{\gram\per\kilo\gram} and \si{\milli\gram\per\kilo\gram}, P in
+    \si{\milli\gram\per\kilo\gram}, BD in \si{\gram\per\centi\metre\cubed},
+    WSA in per cent.}
+  \label{tab:p1indicators}
+  \pgfplotstabletypeset[proctable,
+    columns={site,system,soc,ph,p,bd,wsa,mbc,shi},
+    columns/site/.style={column name=Site, column type=l},
+    columns/system/.style={column name=System, column type=l},
+    columns/soc/.style={column name=SOC, column type=r},
+    columns/ph/.style={column name=pH, column type=r},
+    columns/p/.style={column name=P, column type=r},
+    columns/bd/.style={column name=BD, column type=r},
+    columns/wsa/.style={column name=WSA, column type=r},
+    columns/mbc/.style={column name=MBC, column type=r},
+    columns/shi/.style={column name=SHI, column type=r},
+    every row no 3/.style={before row=\midrule},
+    every row no 6/.style={before row=\midrule},
+  ]{\subfix{../results/p1_indicators.tsv}}
+\end{table}

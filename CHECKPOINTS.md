@@ -95,3 +95,36 @@ Build sequence used for every milestone: `pdflatex main` → `biber main` → `m
 | C3.12 | Each methods section names its data file | 6 of 6 | PASS (6/6) |
 | C3.13 | Sites table typeset from `data/sites.tsv` | 3 rows; values identical to the data file | PASS |
 | C3.14 | Text files stored with LF line endings | 0 CRLF files | PASS (0) |
+
+
+## M4 — Results
+
+**Status:** Complete (committed in two parts)
+**Snapshot:** `milestone_4_results/`
+**Toolchain:** MiKTeX 26.5 (pdfTeX 4.27), biber 2.22, makeindex, Python 3.12 (standard library only)
+
+### Work completed
+- **Part 1.** Added `tools/compute_results.py`, which computes every reported result from the data and writes it to `results/`: eight summary files, four figure files and `values.tex` (148 values). It computes the soil health index with a block-design analysis of variance, the quadratic-plateau fit and agronomic optimum rate, agronomic and recovery efficiency of nitrogen, land equivalent ratios, the tillage × residue factorial analysis of variance, carbon retention, and the combined-site analysis of variance with the least significant difference. P values are computed with a standard-library implementation of the F distribution.
+- Increased plot-to-plot variation in trials T2 and T4 to realistic levels (part 1), and corrected the nitrogen uptake model so that apparent recovery falls between 0.34 and 0.72 (part 2); an earlier model gave a mean recovery of 1.04, which is not physically plausible. Added data rule R14 (0 < mean apparent recovery ≤ 1 at every site and rate) so that the error cannot return.
+- **Part 2.** Added a Results section to each paper in `papers/results/`. Every number in the text is quoted from `results/values.tex` with `\res{key}`; an undefined key prints **??** and raises a warning.
+- Added seven result tables in `tables/`, each typeset from a `results/*.tsv` file with pgfplotstable, and five figures in `figures/`, drawn with pgfplots from the results files at compile time; the fitted response curves of Figure 2.1 take their coefficients from `values.tex`.
+- Extended `soilproc.sty` with the result macros, common table and figure styles, and a float barrier so that each paper's tables and figures are placed before its references.
+
+### Pass/fail checks
+| ID | Check | Threshold | Result |
+|---|---|---|---|
+| C4.1 | Full build of `main.tex` completes | 0 errors; biber and makeindex exit normally | PASS |
+| C4.2 | Warnings and bad boxes in `main.log`, including undefined result keys | exactly 0 matches for `^!`, `Warning:`, `Overfull`, `Underfull` | PASS (0) |
+| C4.3 | Compiled page count of the volume | exactly 34 | PASS (34) |
+| C4.4 | Each paper typeset on its own | 6 of 6 with 0 issues; pages 5, 4, 3, 4, 3, 3 | PASS (6/6) |
+| C4.5 | Data rules R1–R14 | 14 of 14 PASS; 0 violations | PASS (0) |
+| C4.6 | Generator robustness across seeds and block counts | 40 of 40 combinations pass all 14 rules | PASS (40/40) |
+| C4.7 | Reproducibility of data and results | SHA-256 prefixes identical on Linux and Windows: T2 `6732d536f5da`, T4 `172c71a8f1ca`, `values.tex` `9b992b1ae447` (other data files unchanged from M3) | PASS |
+| C4.8 | P values of the F distribution | match SciPy within 1 × 10⁻⁶ in 6 of 6 test cases | PASS (6/6) |
+| C4.9 | Factorial analysis of variance | F ratios match an independent least-squares fit to 2 decimal places (site S2, grain yield) | PASS |
+| C4.10 | Files in `results/` | exactly 13: 8 summary TSV, 4 figure TSV, `values.tex` with 148 values | PASS (13) |
+| C4.11 | Numbers in the Results sections | all quoted by `\res` (100 uses); 0 occurrences of "??" in the PDF | PASS |
+| C4.12 | Result tables typeset from `results/*.tsv` | exactly 7 | PASS (7) |
+| C4.13 | Figures drawn by pgfplots from `results/` | exactly 5; 6 curve coefficients read with `\resnum` | PASS (5) |
+| C4.14 | Each paper's tables and figures appear before its references | 6 of 6 | PASS (6/6) |
+| C4.15 | Text files stored with LF line endings | 0 CRLF files | PASS (0) |

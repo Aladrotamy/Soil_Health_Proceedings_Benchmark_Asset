@@ -1,0 +1,28 @@
+% fig2_yield.tex -- Paper 2: mean yield against nitrogen rate with the fitted
+% quadratic-plateau curves. Means from results/fig2_yield.tsv; curve
+% coefficients from results/values.tex.
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[procfig, xmin=-5, xmax=170, ymin=0,
+        xlabel={Nitrogen rate (\si{\kilo\gram\per\hectare})},
+        ylabel={Grain yield (\si{\tonne\per\hectare})},
+]
+      \foreach \s/\m in {S1/*, S2/square*, S3/triangle*} {
+        \edef\temp{\noexpand\addplot+[only marks, mark=\m]
+          table[col sep=tab, x=n_rate, y=\s] {\subfix{../results/fig2_yield.tsv}};}
+        \temp
+      }
+      \legend{S1, S2, S3}
+      \foreach \s/\c in {S1/blue, S2/red, S3/brown} {
+        \edef\temp{\noexpand\addplot[\c, thick, domain=0:\resnum{p2-nopt-\s}, samples=40, forget plot]
+          {\resnum{p2-a-\s} + \resnum{p2-b-\s}*x + \resnum{p2-c-\s}*x^2};
+          \noexpand\addplot[\c, thick, domain=\resnum{p2-nopt-\s}:160, forget plot] {\resnum{p2-yplat-\s}};}
+        \temp
+      }
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Mean grain yield of maize at five nitrogen rates (points) and the
+    fitted quadratic-plateau response at each site (lines).}
+  \label{fig:p2yield}
+\end{figure}

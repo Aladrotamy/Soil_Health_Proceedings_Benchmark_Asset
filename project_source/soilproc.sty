@@ -19,6 +19,20 @@
 % Loaded early so that \subfix is available for file paths below.
 \RequirePackage{subfiles}
 
+% ---------------------------------------------------------------- computed results
+% results/values.tex is written by tools/compute_results.py. It defines each
+% value with \resdef{key}{value}; the text quotes a value with \res{key}, and
+% figures use the expandable \resnum{key} inside pgfplots expressions. An
+% unknown key prints ?? in bold and raises a warning, so a missing value cannot
+% pass unnoticed.
+\newcommand{\resdef}[2]{\expandafter\def\csname res@#1\endcsname{#2}}
+\newcommand{\res}[1]{%
+  \ifcsname res@#1\endcsname\csname res@#1\endcsname
+  \else\textbf{??}\PackageWarning{soilproc}{Result `#1' is not defined}\fi}
+\newcommand{\resnum}[1]{\csname res@#1\endcsname}
+\InputIfFileExists{\subfix{results/values}}{}%
+  {\PackageWarning{soilproc}{results/values.tex not found; run tools/compute_results.py}}
+
 % ---------------------------------------------------------------- tables, units, figures
 \RequirePackage{booktabs}
 \RequirePackage{siunitx}
@@ -27,7 +41,21 @@
 \RequirePackage{pgfplots}
 \pgfplotsset{compat=1.18}
 \RequirePackage{pgfplotstable}% tables typeset directly from the data files
+\usepgfplotslibrary{groupplots}
+% Common style of the result tables: tab-separated input, values printed
+% exactly as written by the results script, booktabs rules, NA shown as a dash.
+\pgfplotstableset{
+  proctable/.style={col sep=tab, string type,
+    string replace={NA}{--},
+    every head row/.style={before row=\toprule, after row=\midrule},
+    every last row/.style={after row=\bottomrule}}}
+% Common style of the figures.
+\pgfplotsset{procfig/.style={width=0.82\linewidth, height=6cm,
+    tick label style={font=\small}, label style={font=\small},
+    legend style={font=\small, draw=none, fill=none, at={(0.5,1.02)}, anchor=south, legend columns=-1, /tikz/every even column/.append style={column sep=6pt}},
+    ymajorgrids, grid style={gray!25}}}
 \RequirePackage{amsmath}
+\RequirePackage{placeins}
 
 % ---------------------------------------------------------------- volume metadata
 \newcommand*{\volumetitle}{Proceedings of the International Symposium on Soil Health and Sustainable Crop Production}
@@ -78,6 +106,7 @@
   \noindent{\small\itshape Contributed paper}\par\medskip
   \begin{refsection}%
 }{%
+  \FloatBarrier% the paper's tables and figures are placed before its references
   \printbibliography[heading=paperrefs]%
   \end{refsection}%
 }

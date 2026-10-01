@@ -125,7 +125,7 @@ def main():
                 r[4] = max(r[4], base[r[2]] + 0.10)
         for r in rows:
             if r[1] == sid:
-                uptake = 12 * r[4] + 0.35 * r[3] * (1 - 0.3 * r[3] / 160) + g(0, 3)
+                uptake = 10 * r[4] + 0.12 * r[3] + g(0, 3)
                 r.append(max(uptake, 10))
     rows = [(pid, sid, b, n, rnd(y, 2), rnd(u, 1)) for pid, sid, b, n, y, u in rows]
     write_tsv(os.path.join(out, "trials", "t2_nitrogen.tsv"),

@@ -1,0 +1,31 @@
+% main.tex -- master file of the proceedings volume.
+% Build: pdflatex main; biber main; makeindex main; pdflatex main; pdflatex main
+\documentclass[11pt,a4paper,twoside,openright]{book}
+% When a paper in papers/ is typeset on its own, subfiles loads this style as
+% ../soilproc and LaTeX warns that the name differs from soilproc. The file is
+% the same, so exactly that one message is filtered.
+\usepackage{silence}
+\WarningFilter{latex}{You have requested package `../soilproc'}
+\usepackage{soilproc}
+
+\begin{document}
+
+\frontmatter
+\input{frontmatter/titlepage}
+\input{frontmatter/imprint}
+\tableofcontents
+\input{frontmatter/preface}
+\input{frontmatter/organisation}
+
+\mainmatter
+\subfile{papers/paper1_indicators}
+\subfile{papers/paper2_nitrogen}
+\subfile{papers/paper3_intercropping}
+\subfile{papers/paper4_tillage}
+\subfile{papers/paper5_amendments}
+\subfile{papers/paper6_trials}
+
+\backmatter
+% List of abbreviations and subject index are added in later milestones.
+
+\end{document}

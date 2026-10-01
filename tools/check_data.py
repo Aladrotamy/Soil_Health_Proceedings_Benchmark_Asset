@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the trial data against the thirteen rules in notes/data_rules.md.
+"""Check the trial data against the fourteen rules in notes/data_rules.md.
 
     python tools/check_data.py                    # checks project_source/data
     python tools/check_data.py variants/variant_B/data
@@ -210,9 +210,25 @@ def main():
     except (KeyError, ValueError, TypeError, ZeroDivisionError) as e:
         fail("R11", f"could not be evaluated: {type(e).__name__} {e}")
 
+    # R14 apparent nitrogen recovery
+    try:
+        t2r = t["t2_nitrogen.tsv"]
+        u0 = {(r["site"], r["block"]): float(r["n_uptake_kgha"]) for r in t2r if int(r["n_rate_kgha"]) == 0}
+        groups = defaultdict(list)
+        for r in t2r:
+            n = int(r["n_rate_kgha"])
+            if n > 0:
+                groups[(r["site"], n)].append((float(r["n_uptake_kgha"]) - u0[(r["site"], r["block"])]) / n)
+        for (s_, n), xs in sorted(groups.items()):
+            m = sum(xs) / len(xs)
+            if not 0 < m <= 1:
+                fail("R14", f"{s_} N{n}: mean apparent recovery {m:.3f}")
+    except (KeyError, ValueError, TypeError, ZeroDivisionError) as e:
+        fail("R14", f"could not be evaluated: {type(e).__name__} {e}")
+
     # report
     print(f"Data rules check: {data}")
-    for i in range(1, 14):
+    for i in range(1, 15):
         rule = f"R{i}"
         print(f"  {rule:<4} {'PASS' if v[rule] == 0 else 'FAIL'}  violations: {v[rule]}")
         for n in notes[rule]:

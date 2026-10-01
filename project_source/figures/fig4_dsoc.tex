@@ -1,0 +1,19 @@
+% fig4_dsoc.tex -- Paper 4: change in soil organic carbon by treatment and
+% site, drawn from results/fig4_dsoc.tsv.
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[procfig, ybar, bar width=8pt,
+        symbolic x coords={CT-R0,CT-R1,NT-R0,NT-R1}, xtick=data,
+        ylabel={$\Delta$SOC (\si{\gram\per\kilo\gram})},
+]
+      \addplot table[col sep=tab, x=treatment, y=S1] {\subfix{../results/fig4_dsoc.tsv}};
+      \addplot table[col sep=tab, x=treatment, y=S2] {\subfix{../results/fig4_dsoc.tsv}};
+      \addplot table[col sep=tab, x=treatment, y=S3] {\subfix{../results/fig4_dsoc.tsv}};
+      \legend{S1, S2, S3}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Mean change in topsoil organic carbon over five years under the four
+    combinations of tillage and residue management at each site.}
+  \label{fig:p4dsoc}
+\end{figure}
