@@ -1,0 +1,18 @@
+% fig5_retention.tex -- Paper 5: carbon retention against clay content, drawn
+% from results/fig5_retention.tsv.
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[procfig, xmin=10, xmax=40, ymin=0, ymax=0.3,
+        xtick={10,15,...,40}, xlabel={Clay content (\%)}, ylabel={Carbon retained (fraction)},
+]
+      \addplot+[mark=*]        table[col sep=tab, x=clay, y=MANURE]  {\subfix{../results/fig5_retention.tsv}};
+      \addplot+[mark=square*]  table[col sep=tab, x=clay, y=COMPOST] {\subfix{../results/fig5_retention.tsv}};
+      \addplot+[mark=triangle*] table[col sep=tab, x=clay, y=RESIDUE] {\subfix{../results/fig5_retention.tsv}};
+      \legend{Manure, Compost, Residue}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Mean fraction of added carbon retained after five years against the
+    clay content of the three sites.}
+  \label{fig:p5retention}
+\end{figure}

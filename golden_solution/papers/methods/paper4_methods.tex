@@ -1,0 +1,34 @@
+% paper4_methods.tex -- Materials and Methods of Paper 4, input by
+% papers/paper4_tillage.tex.
+\section{Materials and Methods}
+
+\subsection{Treatments and design}
+Two tillage systems, conventional tillage (CT) and no-till (NT), were combined
+factorially with two residue treatments, residues removed (R0) and residues
+retained on the surface (R1), giving four combinations. The combinations were
+arranged in randomised complete block\index{randomised complete block design}s with four blocks at each of the three
+sites and maintained for five years \parencite{gomez1984}. The data are held in
+\texttt{data/trials/t4\_tillage.tsv}.
+
+\subsection{Measurements}
+Topsoil to \SI{0.20}{\metre} was sampled at the start and at the end of the
+trial, and soil organic carbon was determined by wet oxidation\index{soil organic carbon!wet oxidation}
+\parencite{walkley1934}. The change in soil organic carbon of a plot is
+\begin{equation}
+  \Delta\mathrm{SOC} = \mathrm{SOC}_{\mathrm{final}} - \mathrm{SOC}_{\mathrm{initial}}
+  \quad (\si{\gram\per\kilo\gram}).
+  \label{eq:dsoc}
+\end{equation}
+Maize grain yield in the final year is expressed in \si{\tonne\per\hectare} on a
+dry-matter basis.
+
+\subsection{Statistical model}
+At each site, the response $y_{ijk}$ of tillage $i$ and residue treatment $j$ in
+block $k$ is described by
+\begin{equation}
+  y_{ijk} = \mu + \beta_k + T_i + R_j + (TR)_{ij} + \varepsilon_{ijk},
+  \label{eq:factorial}
+\end{equation}
+where $T_i$ and $R_j$ are the main effects of tillage and residues and
+$(TR)_{ij}$ their interaction. A significant interaction indicates that the
+effect of tillage depends on whether residues are retained.

@@ -1,0 +1,102 @@
+{
+ "abbreviations": 17,
+ "editable": {
+  "backmatter/abbreviations.tex": {
+   "content": "% abbreviations.tex -- List of abbreviations used in the volume.\n% Every abbreviation is spelled out at its first use in each paper; this list\n% collects them in alphabetical order.\n\\chapter{List of Abbreviations}\n\n\\begin{center}\n\\begin{tabular}{@{}ll@{}}\n  \\toprule\n  Abbreviation & Meaning \\\\\n  \\midrule\n  AE$_N$   & agronomic efficiency of applied nitrogen \\\\\n  BD       & bulk density \\\\\n  CONS     & conservation management system \\\\\n  CONV     & conventional management system \\\\\n  CT       & conventional tillage \\\\\n  INTG     & integrated management system \\\\\n  LER      & land equivalent ratio \\\\\n  LSD      & least significant difference \\\\\n  MBC      & microbial biomass carbon \\\\\n  MSE      & residual (error) mean square \\\\\n  NT       & no-till \\\\\n  P        & extractable phosphorus (Mehlich~3) \\\\\n  R0, R1   & crop residues removed, retained \\\\\n  RE$_N$   & apparent recovery efficiency of applied nitrogen \\\\\n  SHI      & soil health index \\\\\n  SOC      & soil organic carbon \\\\\n  WSA      & water-stable aggregates \\\\\n  \\bottomrule\n\\end{tabular}\n\\end{center}\n"
+  },
+  "papers/discussion/paper3_discussion.tex": {
+   "content": "% paper3_discussion.tex -- Discussion and Conclusion of Paper 3, input by\n% papers/paper3_intercropping.tex.\n\\section{Discussion}\n\nA total land equivalent ratio above one at every site shows that the two\ncrops used the available resources more completely together than apart. The\npartial ratios indicate how the advantage arose. Maize, the taller and more\ncompetitive crop, retained most of its sole-crop yield, while cowpea lost a\nlarger share of its yield to shading and competition yet still contributed\nenough to lift the total well above one. This asymmetry is typical of\ncereal--legume mixtures, in which complementarity in the use of light,\nwater and nitrogen allows the combined yield to exceed what either crop could\nproduce on the same land alone \\parencite{brooker2015}.\n\nThe advantage was largest at the humid tropical site and smallest at the\ntemperate site. Where the growing season is long and water is not limiting,\nthe two crops can occupy the canopy for longer and use more of the resources\nthat a single crop would leave unused. The comparison must nonetheless be read\nwith care: the land equivalent ratio depends on the sole-crop yields used to\nstandardise it, and on the relative proportions of the two crops in the\nintercrop \\parencite{mead1980}. Both were held constant here, so the ratios\ncan be compared between sites but not with trials that used other row\narrangements.\n\nThe land equivalent ratio measures the efficiency of land use, not the value\nof the harvest. Because maize and cowpea grain differ in price and in their\nrole in the diet, a farmer may prefer an arrangement with a slightly lower\nratio but a larger share of the more valuable crop. The nitrogen that cowpea\nleaves in the soil, a benefit to the following cereal \\parencite{vanlauwe2010},\nis also not captured by a ratio calculated within a single season.\n\n\\section{Conclusion}\n\nMaize--cowpea intercropping gave a yield advantage at all three sites, with\nmean land equivalent ratios of \\res{p3-ler-S1}, \\res{p3-ler-S2} and\n\\res{p3-ler-S3}. Maize contributed the larger share of the advantage at every\nsite. The ratio should be interpreted together with the value of each crop and\nthe effect of the legume on the following season. The yields are synthetic\nand illustrate the calculation only.\n"
+  },
+  "papers/discussion/paper4_discussion.tex": {
+   "content": "% paper4_discussion.tex -- Discussion and Conclusion of Paper 4, input by\n% papers/paper4_tillage.tex.\n\\section{Discussion}\n\nBoth reduced tillage and residue retention increased topsoil organic carbon,\nand their combination gave the largest gain at every site. Residues supply the\ncarbon input; reduced disturbance slows the breakdown of aggregates that\nprotect organic matter from decomposition. Losses under conventional tillage\nwith residues removed show that, without either, cultivated soils continue to\nlose carbon, consistent with the large carbon deficit of many agricultural\nsoils \\parencite{lal2004}. Two cautions apply to these gains. They were\nmeasured in the topsoil only, and no-till tends to concentrate carbon near the\nsurface, so part of the apparent gain may be a redistribution rather than a\nnet increase in the whole profile.\n\nThe yield results differed from the carbon results and from site to site. At\nthe temperate site, no-till lowered yield, particularly when residues were\nremoved; at the semi-arid site, no-till with residues retained gave the\nhighest yield; at the humid tropical site, neither factor mattered. This\npattern mirrors the conclusion of a global meta-analysis, in which no-till\nreduced yields on average but performed best in dry climates and when combined\nwith residue retention \\parencite{pittelkow2015}. Under dry conditions the\nresidue mulch conserves soil water, which can outweigh the yield penalty of\nreduced tillage.\n\nThe results also show why conservation agriculture cannot be judged as a\nsingle package. In many smallholder systems, residues are fed to livestock and\ncannot simply be left on the field, and without residues the yield penalty of\nno-till may be largest \\parencite{giller2009}. The factorial design used here\nseparates the two components and shows that, at two of the three sites, the\nbenefit of no-till depended on the residues being retained.\n\n\\section{Conclusion}\n\nOver five years, no-till with residues retained raised topsoil organic carbon\nby \\res{p4-dsoc-S1-NTR1}, \\res{p4-dsoc-S2-NTR1} and\n\\res{p4-dsoc-S3-NTR1}~\\si{\\gram\\per\\kilo\\gram} at S1, S2 and S3, while the\nyield response to tillage depended on site and on residue management. Where\nresidues cannot be retained, no-till alone is unlikely to deliver either the\ncarbon or the yield benefit. All data are synthetic and illustrate the\nanalysis only.\n"
+  },
+  "papers/paper4_tillage.tex": {
+   "content": "% paper4_tillage.tex -- Paper 4. Typeset alone with this file, or inside\n% the volume through main.tex.\n\\documentclass[../main.tex]{subfiles}\n\\begin{document}\n\\begin{paper}{Tillage and Residue Management Effects on Soil Organic Carbon and Yield}{Tillage, residues and soil organic carbon}\n\\label{paper:tillage}\n\n\\begin{paperabstract}\nReduced tillage and the retention of crop residues are promoted to protect\nsoils and build soil organic carbon, but their effect on crop yield varies\nwith climate and management. This paper reports a factorial trial combining\ntwo tillage systems, conventional and no-till, with two residue treatments,\nremoved and retained, at three sites. Soil organic carbon in the topsoil is\ncompared with its value at the start of the trial, and grain yield is compared\nacross the four combinations. The data are synthetic; the paper shows how a\ntwo-factor trial is analysed and how changes in soil organic carbon are\nreported alongside yield.\n\\end{paperabstract}\n\\paperkeywords{conservation agriculture; no-till; crop residues; soil organic carbon; factorial trial}\n\n\\section{Introduction}\n\nSoil organic carbon lies at the centre of soil health\\index{soil health}. It supports soil\nstructure, water retention and nutrient supply, and agricultural soils that\nhave lost carbon through cultivation have a large capacity to regain it.\nPractices that increase the soil carbon pool include reduced tillage, the\nretention of residues, cover crops and the addition of manure\\index{organic amendments!manure}s, and the\nresulting gains in soil carbon can support higher crop yields on degraded\nland \\parencite{lal2004}.\n\nConservation agriculture\\index{conservation agriculture} combines three principles: minimal soil disturbance,\npermanent soil cover and crop diversification. A global meta-analysis of\npaired yield observations found that no-till\\index{tillage!no-till} on its own tends to reduce\nyields relative to conventional tillage, but that the reduction is smallest\nwhen no-till is combined with residue retention\\index{crop residues} and crop rotation, and that\nthe combination can raise rainfed yields in dry climates\n\\parencite{pittelkow2015}. The yield effect of reduced tillage therefore\ndepends on whether the other principles are applied with it.\n\nWhether these principles can be applied in practice is a separate question.\nIn smallholder farming systems, crop residues are often needed as livestock\nfeed, weeding without tillage can increase labour, and the evidence for\nbenefits has been argued to be less consistent than its promotion suggests\n\\parencite{giller2009}. Trials that separate the effect of tillage from the\neffect of residues help to show which part of the package produces which\neffect.\n\nThis paper reports such a trial. Soil organic carbon is determined by wet\noxidation \\parencite{walkley1934}. The aims are to estimate the separate and\ncombined effects of tillage and residue management on topsoil organic carbon\\index{soil organic carbon}\nand on grain yield, and to test whether the effect of tillage depends on the\nresidue treatment.\n\n\\input{\\subfix{methods/paper4_methods}}\n\n\\input{\\subfix{results/paper4_results}}\n\n\\input{\\subfix{discussion/paper4_discussion}}\n\n\\end{paper}\n\\end{document}\n"
+  },
+  "papers/results/paper3_results.tex": {
+   "content": "% paper3_results.tex -- Results of Paper 3, input by papers/paper3_intercropping.tex.\n% Every number is quoted from results/values.tex with \\res{...}.\n\\section{Results}\n\nIn every block, each crop yielded less in the intercrop than as a sole crop,\nas expected when each species occupies only half of the rows. The combined\nproduction of the intercrop, however, exceeded that of the sole crops on an\nequal-area basis at all three sites (Table~\\ref{tab:p3ler}).\n\n\\input{\\subfix{../tables/p3_ler}}\n\nThe mean total land equivalent ratio was \\res{p3-ler-S1} at S1,\n\\res{p3-ler-S2} at S2 and \\res{p3-ler-S3} at S3: to match one hectare of\nintercrop, sole crops would have needed between \\res{p3-ler-S1} and\n\\res{p3-ler-S3} hectares of land. Maize contributed the larger share at\nevery site, with partial ratios of \\res{p3-lerm-S1}, \\res{p3-lerm-S2} and\n\\res{p3-lerm-S3}; the partial ratios of cowpea were \\res{p3-lerc-S1},\n\\res{p3-lerc-S2} and \\res{p3-lerc-S3} (Figure~\\ref{fig:p3ler}). The highest\nratio was found at the humid tropical site, where maize retained the largest\nfraction of its sole-crop yield in the intercrop.\n\n\\input{\\subfix{../figures/fig3_ler}}\n"
+  },
+  "tables/sites.tex": {
+   "content": "% sites.tex -- Table of the three trial sites, typeset directly from\n% data/sites.tsv, so the table always agrees with the data. Paths inside\n% papers are written relative to papers/ and wrapped in \\subfix, so they\n% resolve both in the volume and when a paper is typeset on its own.\n\\begin{table}[htbp]\n  \\centering\\footnotesize\n  \\setlength{\\tabcolsep}{4pt}\n  \\caption{The three trial sites: clay and sand content, topsoil pH in water, soil organic carbon (SOC) and bulk density (BD) at the start of the trials, mean annual rainfall and mean annual temperature. Values are read from \\texttt{data/sites.tsv}.}\n  \\label{tab:sites}\n  \\pgfplotstabletypeset[\n    col sep=tab, string type,\n    columns={site,zone,clay_pct,sand_pct,ph_initial,soc_initial_gkg,bulk_density_gcm3,rainfall_mm,temperature_c},\n    columns/site/.style={column name=Site, column type=l},\n    columns/zone/.style={column name=Zone, column type=l},\n    columns/clay_pct/.style={column name={Clay (\\%)}, column type=r},\n    columns/sand_pct/.style={column name={Sand (\\%)}, column type=r},\n    columns/ph_initial/.style={column name=pH, column type=r},\n    columns/soc_initial_gkg/.style={column name={SOC (\\si{\\gram\\per\\kilo\\gram})}, column type=r},\n    columns/bulk_density_gcm3/.style={column name={BD (\\si{\\gram\\per\\centi\\metre\\cubed})}, column type=r},\n    columns/rainfall_mm/.style={column name={Rain (\\si{\\milli\\metre})}, column type=r},\n    columns/temperature_c/.style={column name={Temp.\\ (\\si{\\degreeCelsius})}, column type=r},\n    every head row/.style={before row=\\toprule, after row=\\midrule},\n    every last row/.style={after row=\\bottomrule},\n  ]{\\subfix{../data/sites.tsv}}\n\\end{table}\n"
+  }
+ },
+ "frozen": {
+  "bib/soilhealth.bib": "a9f33a00acad34e80d5db9937722d7bc75eb2f942a5e010c7138e659801d7f4c",
+  "bib/soilhealth_draft.bib": "c9baae1e01ba618fece78640aff1e8a58f38f4cdb456acc66e4b72dec7ffe600",
+  "data/archive/t2_nitrogen_2025_export.tsv": "1e242a5ec39d9dbf4377daf8427b8f299b1131b5fe489ef39fbd30c38eb74fed",
+  "data/sites.tsv": "350f855fd54620b7cf08d173da629d9c2441d5ca10ca42c1865dc8765c260210",
+  "data/trials/plot_register.tsv": "668c940f92f4eca5dd76d328c0b6221f7ea283c0f4088578ac796ed3b263abb8",
+  "data/trials/t1_indicators.tsv": "b93b68b5a0672ea5c8bbe8bf72ab4d9054e9fbcefccda2aec8793aa2e8c0db75",
+  "data/trials/t2_nitrogen.tsv": "6732d536f5da53950cde7f0714655eb14c48b4ee67207aa6a257e01de10b6a79",
+  "data/trials/t3_intercrop.tsv": "148ae9ca7fd39e75e0a9a0f45f9044d253737c2a0ff8c11fbc638ef9bc723b8e",
+  "data/trials/t4_tillage.tsv": "172c71a8f1ca43f61b09f6d189a9ea1fddc8cfa2865ced7267f5aa5c651f4f24",
+  "data/trials/t5_amendments.tsv": "b13bbf8d62cfa7c13d94d6ccf9e74dbfea1eded0aac8da7527d2fc72f7a985f0",
+  "figures/fig1_shi.tex": "4d5b8de17a1491dca6c75646c16b18556fb6dc97eb45f92a45c6771ce40cc4a4",
+  "figures/fig2_yield.tex": "767d280343d98559df0eec020f688085a4fb2539e6d05f3b5428f758fe870912",
+  "figures/fig3_ler.tex": "e7a9c3e873a69dbfee0f41fb8eeadd78665bb00dffa44a750599816f73641f57",
+  "figures/fig4_dsoc.tex": "326f12b7f4d4c5b89ad0ce8e3e9a0612ca7c647f99442f651de2eb66d1564a45",
+  "figures/fig5_retention.tex": "37acb839e5c6e8d91638538fc4fc0d6514c059c8cf10230401434153369c589f",
+  "frontmatter/imprint.tex": "8ef58fd298a9701f1f381602b952b400e1e2128fa39cdff51380b84fc6479517",
+  "frontmatter/organisation.tex": "45de840d93985984ba7fcc501d7bf1ad5bc21f3dee650cdfce8684874cf28a8c",
+  "frontmatter/preface.tex": "636c53b138a6fb27f9103ff9fdd93bc6aef77748044745a8b52c906820b63870",
+  "frontmatter/titlepage.tex": "c2160edb4d798ba8df526b83e237e8eea81941de563153a68d016db4d93d4bf1",
+  "main.tex": "7529580ab64efbcce2d0e1d4abcc9891896ad54e26ce4b8b8aea58c83820a26c",
+  "notes/data_rules.md": "0039593141b52ff963d751e2d2db36f98575122619f2dee4a2414a8202385810",
+  "notes/review_log.md": "5aec24085c94dc5d3d759d16d5c3dd63545fdb4656b916a752dfdcf7fda30da8",
+  "papers/discussion/paper1_discussion.tex": "11c5c00623ff2fea470642b9164017174f737da9c67880dd9abfe96f1fcbb7c8",
+  "papers/discussion/paper2_discussion.tex": "ef7cd270d1cf11e579b888e4b005f9e2799906c6cb6297968619037495c25378",
+  "papers/discussion/paper5_discussion.tex": "35e0edd7331b2a36c5b2ec00966e0ee738fc040acda949ee8e757d90db7f347c",
+  "papers/discussion/paper6_discussion.tex": "77e69844bdaf2839b335828a47722020b427dc41646af1e9ccd947f0f911febe",
+  "papers/methods/paper1_methods.tex": "26fc92fcbbb3737ffa27b168177ca1b8f9e0faa25942e9e54e4c77ba55ae10ce",
+  "papers/methods/paper2_methods.tex": "d2e3fdfce625734e3a8f6c9b553ce9f64f3b7dc38d40a0ad57197d0eb7389436",
+  "papers/methods/paper3_methods.tex": "6df116b27110ff45daf0d77efe7045eb9b6b0671d346aa64ffc747061d2a5b09",
+  "papers/methods/paper4_methods.tex": "4301dd69708c64dd2b05aacd2cb2ccb628e6e7f87882efa2c1fb91aa9b7f0a7d",
+  "papers/methods/paper5_methods.tex": "3f9bf38e92c308ed6d67ef2b6a66218423c8882e5b034af8ec3f0672286a37da",
+  "papers/methods/paper6_methods.tex": "2fc9683105c97cd3efaa391d5d99e8bb61d402a4f6f52298a056274543b82a85",
+  "papers/paper1_indicators.tex": "ac5468a046cdcbab542980d0a8f145769edef90bac3421ae57e7f4aa2177ecee",
+  "papers/paper2_nitrogen.tex": "f55e66dbbc487e5eb0aea89e2c561051bfc6bae59ab1ffa810df076f4e58ce92",
+  "papers/paper3_intercropping.tex": "a8e89f6ce4ff96ea42dc5c87bf202808f6c2a7f118247067e9a6cfa20aa7e64c",
+  "papers/paper5_amendments.tex": "1107e08b03c87880759f9c53583d8ff3307fc15b3460144f6ffbcad4ed2c6391",
+  "papers/paper6_trials.tex": "818b7e50bb203963065106eee604b4bb64704f0e0a026646c9476ac7c9918286",
+  "papers/results/paper1_results.tex": "b269e52face743856c3cd7297cdee642cdf74c92640a9131744b1f2ef067e18c",
+  "papers/results/paper2_results.tex": "bb30bfc261b93fea0afd5014c1a463ab8ab9546815ca75a96b6d5bf9cc124205",
+  "papers/results/paper4_results.tex": "8831792840a34a3188907abb2d38bcfa95004764860b17eed8c46916f0ee2b1a",
+  "papers/results/paper5_results.tex": "01c79e57eb6c09e5fd7c1422663c77b4cd234562f65a991e5620b473874558bd",
+  "papers/results/paper6_results.tex": "2d714632c8a99a4bdc27db473bd7f1754fa6f1d567ace5914a884eb200e54d36",
+  "results/fig1_shi.tsv": "6e8a2e7ede135a64dea0da7ee57b9165ce56d772307fad19df08d27ec36a64a7",
+  "results/fig2_yield.tsv": "d45a870ddc094e71165053eeb70adaffc30841b814eee6f44287a67b77186ad7",
+  "results/fig4_dsoc.tsv": "cba69d857c57046cc98aaa2e7f8dd14e4c7195114716987527384ad54549068f",
+  "results/fig5_retention.tsv": "7f2a824a1a26546d4309be65692d5cb6962aa565a893d5191020c3b4d44a6f7f",
+  "results/p1_indicators.tsv": "799281ae35422db525c9ebba600297655d34bcd056b74a23d81935d3ac2a61eb",
+  "results/p2_fit.tsv": "b6f3dd729a6e363fbaf91e8c9661f00141c94c8a3a0609dce8346d78c842361c",
+  "results/p2_response.tsv": "4d3f1ae729d9bfedf84cea0554cd352082141aff8f7c2e6dd582ddc117163d5c",
+  "results/p3_ler.tsv": "a9c4d908493e74d1859b104c983f8a007c9507b858755c4aed2fe4dbd6d47642",
+  "results/p4_anova.tsv": "18e3b959b8926537a75bb67493e9b1113761dae01dc1e787fe61cc9e3e73915c",
+  "results/p4_means.tsv": "a2acba544c07b41627989c186edc5a4b6d1ee0b92abf681f67c89ffba1588be0",
+  "results/p5_retention.tsv": "430791f2c04bf80eadf3bb35e30d8c91f53c6007c7c6bcefea2f42058dded93a",
+  "results/p6_combined.tsv": "ba83f3cde8fb25eacf24aa7c68f3b45330149e27dd053d5a948333656e20eced",
+  "results/values.tex": "d607777b1569d4167cf4f64ca8776d5138955f19917c7cb1a21558c277455cf3",
+  "soilproc.sty": "90f780f6b36728d048fcb02ff40c725a487319f1d79e35ed84e6bb2cc890c872",
+  "tables/p1_indicators.tex": "53ed3ebb6ecd026e95ccab6065bd56305b5a11ffb5396f207ad7fc76154b5c57",
+  "tables/p2_response.tex": "5d0f7c60c0be6b34f389995b4296858e8999ae379c8c72b8d80d9ed4d654a721",
+  "tables/p3_ler.tex": "55e511dea55aa0ace32bc3cd626255c71ef45052c7e683320e06c668a19d51c3",
+  "tables/p4_anova.tex": "62c5bd92f0ce2be1bce1fcff4421f01b7ed9e284ceb390dfd8ae989e590ede93",
+  "tables/p4_means.tex": "f5cb888c83e2b99fc9824285c6cf281a9a391342f6701f2da1483e8da8710d44",
+  "tables/p5_retention.tex": "45ac10fab9900dc4972de38962895b56257976d8ed1db9dca786f8621ff8901e",
+  "tables/p6_combined.tex": "7f8744c2cc5df50b2b15725116d688e3e104beb5f35793ed30870f54b0c9c73a",
+  "tables/scoring.tex": "210ebd2b8552fa5fa88defe4516b2d5b53acff5ff354b6caad428f071dbec5c6"
+ },
+ "pages": 41,
+ "soc_index_count": 3,
+ "values": {
+  "p3-ler-S3": "1.37"
+ },
+ "weights": {
+  "D1": 2.0,
+  "D2": 2.0,
+  "D3": 2.0,
+  "D4": 2.0,
+  "D5": 1.5,
+  "D6": 1.0
+ }
+}

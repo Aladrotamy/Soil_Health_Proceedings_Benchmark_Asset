@@ -4,15 +4,15 @@
 % resolve both in the volume and when a paper is typeset on its own.
 \begin{table}[htbp]
   \centering\small
-  \setlength{\tabcolsep}{5pt}
-  \caption{The three trial sites: clay content, topsoil pH in water, soil organic carbon (SOC) and bulk density (BD) at the start of the trials, mean annual rainfall and mean annual temperature. Values are read from \texttt{data/sites.tsv}.}
+  \caption{The three trial sites: clay and sand content, topsoil pH in water, soil organic carbon (SOC) and bulk density (BD) at the start of the trials, mean annual rainfall and mean annual temperature. Values are read from \texttt{data/sites.tsv}.}
   \label{tab:sites}
   \pgfplotstabletypeset[
     col sep=tab, string type,
-    columns={site,zone,clay_pct,ph_initial,soc_initial_gkg,bulk_density_gcm3,rainfall_mm,temperature_c},
+    columns={site,zone,clay_pct,sand_pct,ph_initial,soc_initial_gkg,bulk_density_gcm3,rainfall_mm,temperature_c},
     columns/site/.style={column name=Site, column type=l},
     columns/zone/.style={column name=Zone, column type=l},
     columns/clay_pct/.style={column name={Clay (\%)}, column type=r},
+    columns/sand_pct/.style={column name={Sand (\%)}, column type=r},
     columns/ph_initial/.style={column name=pH, column type=r},
     columns/soc_initial_gkg/.style={column name={SOC (\si{\gram\per\kilo\gram})}, column type=r},
     columns/bulk_density_gcm3/.style={column name={BD (\si{\gram\per\centi\metre\cubed})}, column type=r},

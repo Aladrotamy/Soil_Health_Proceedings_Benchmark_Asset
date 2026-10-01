@@ -159,3 +159,43 @@ Build sequence used for every milestone: `pdflatex main` → `biber main` → `m
 | C5.11 | Undefined result values | 0 occurrences of "??" in the PDF | PASS (0) |
 | C5.12 | Text files stored with LF line endings | 0 CRLF files | PASS (0) |
 | C5.13 | Full compile on Overleaf | PDF produced with 0 errors | OPEN — free-plan timeout; awaiting an account with a longer compile limit |
+
+
+## M6 — Verification Layer
+
+**Status:** Complete
+**Snapshot:** `milestone_6_verification/` (the seeded start state)
+**Toolchain:** MiKTeX 26.5 (pdfTeX 4.27), biber 2.22, makeindex, Python 3.12 (standard library only)
+
+### Work completed
+- Added `golden_solution/`, the correct finished project (70 files including its compiled `main.pdf`), with the decoys and the review log present and unchanged.
+- Turned `project_source/` into the task's start state with six planted defects, each a different skill:
+
+| ID | Defect | Where | Visible in | Weight |
+|---|---|---|---|---|
+| D1 | Sites table overruns the margin (Overfull \hbox, 46.1 pt too wide); all 9 columns must be kept | `tables/sites.tex` | compile log only | 2.0 |
+| D2 | Citation key `pittelkow2016` does not exist in the bibliography | `papers/discussion/paper4_discussion.tex` | compile log, bold key in PDF | 2.0 |
+| D3 | `\ref{tab:p3LER}` does not match the label `tab:p3ler` | `papers/results/paper3_results.tex` | "??" in PDF | 2.0 |
+| D4 | Land equivalent ratio of S3 typed as 1.32; the computed value is 1.37 | `papers/discussion/paper3_discussion.tex` | comparison with Table 3.1 | 2.0 |
+| D5 | `\index{Soil organic carbon}` splits the index entry in two | `papers/paper4_tillage.tex` | compiled index only | 1.5 |
+| D6 | LER missing from the List of Abbreviations | `backmatter/abbreviations.tex` | back matter | 1.0 |
+
+- Added two decoys, which must remain unchanged and unused: `data/archive/t2_nitrogen_2025_export.tsv` (an outdated export of trial T2 from a different seed, with an older column name) and `bib/soilhealth_draft.bib` (a superseded bibliography with ASCII-stripped names and the key `pittelkow2016`, which would appear to fix D2).
+- Added `notes/review_log.md`: six editor's queries describing each symptom as a reader would see it, without prescribing the fix.
+- Added `verifier/verify.py`, `verifier/build_expected.py` and `verifier/expected.json`. The verifier compiles a submission in a temporary copy and applies 7 gate checks (compiles with 0 errors; 64 frozen files match their SHA-256; no files added; each editable file keeps similarity ≥ 0.90 to the golden text and length ≤ 110 %; no warning suppression, extra bibliography or decoy path; page count 40–42; no warning other than the seeded ones) and 16 defect checks. Score = gate × (weights of fixed defects) / 10.5. File comparisons fold CRLF to LF, so line endings never decide a check.
+- Added `verifier/run_oracle.py`, which scores 21 constructed submissions against their requirements, and `verifier/oracle_report.txt`.
+
+### Pass/fail checks
+| ID | Check | Threshold | Result |
+|---|---|---|---|
+| C6.1 | Golden solution builds | 0 errors, 0 warnings, 41 pages | PASS |
+| C6.2 | Seeded start state shows each defect | Overfull 46.1 pt; undefined citation `pittelkow2016`; undefined reference `tab:p3LER`; 2 top-level index entries for soil organic carbon; 16 abbreviations | PASS (6/6) |
+| C6.3 | `expected.json` reproducible | SHA-256 prefix `fac1755afcaf` identical when rebuilt on Linux (TeX Live 2023) and Windows (MiKTeX 26.5) | PASS |
+| C6.4 | Null: untouched start state | score exactly 0 | PASS (0.0000) |
+| C6.5 | Golden solution | score exactly 1 | PASS (1.0000) |
+| C6.6 | Monotone: defects fixed in order D1–D5 | scores strictly increase: 0.1905, 0.3810, 0.5714, 0.7619, 0.9048 | PASS |
+| C6.7 | Alternative valid fixes | 4 of 4 score exactly 1 (`\resizebox`, narrower `\tabcolsep`, smaller font, value typed as 1.37) | PASS (4/4) |
+| C6.8 | Adversarial submissions | 10 of 10 score below 1; 7 of them exactly 0 (warning hidden with `\hfuzz`, `.bib` key renamed, label renamed, decoy edited, decoy named, instruction pasted, file added) | PASS (10/10) |
+| C6.9 | Oracle on both systems | 21 of 21 cases meet their requirement on Linux and on Windows, with identical scores | PASS (21/21) |
+| C6.10 | Data rules on golden and start state | 14 of 14 pass on both | PASS |
+| C6.11 | Text files stored with LF line endings | 0 CRLF files | PASS (0) |

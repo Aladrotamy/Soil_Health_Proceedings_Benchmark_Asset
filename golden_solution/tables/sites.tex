@@ -1,0 +1,25 @@
+% sites.tex -- Table of the three trial sites, typeset directly from
+% data/sites.tsv, so the table always agrees with the data. Paths inside
+% papers are written relative to papers/ and wrapped in \subfix, so they
+% resolve both in the volume and when a paper is typeset on its own.
+\begin{table}[htbp]
+  \centering\footnotesize
+  \setlength{\tabcolsep}{4pt}
+  \caption{The three trial sites: clay and sand content, topsoil pH in water, soil organic carbon (SOC) and bulk density (BD) at the start of the trials, mean annual rainfall and mean annual temperature. Values are read from \texttt{data/sites.tsv}.}
+  \label{tab:sites}
+  \pgfplotstabletypeset[
+    col sep=tab, string type,
+    columns={site,zone,clay_pct,sand_pct,ph_initial,soc_initial_gkg,bulk_density_gcm3,rainfall_mm,temperature_c},
+    columns/site/.style={column name=Site, column type=l},
+    columns/zone/.style={column name=Zone, column type=l},
+    columns/clay_pct/.style={column name={Clay (\%)}, column type=r},
+    columns/sand_pct/.style={column name={Sand (\%)}, column type=r},
+    columns/ph_initial/.style={column name=pH, column type=r},
+    columns/soc_initial_gkg/.style={column name={SOC (\si{\gram\per\kilo\gram})}, column type=r},
+    columns/bulk_density_gcm3/.style={column name={BD (\si{\gram\per\centi\metre\cubed})}, column type=r},
+    columns/rainfall_mm/.style={column name={Rain (\si{\milli\metre})}, column type=r},
+    columns/temperature_c/.style={column name={Temp.\ (\si{\degreeCelsius})}, column type=r},
+    every head row/.style={before row=\toprule, after row=\midrule},
+    every last row/.style={after row=\bottomrule},
+  ]{\subfix{../data/sites.tsv}}
+\end{table}

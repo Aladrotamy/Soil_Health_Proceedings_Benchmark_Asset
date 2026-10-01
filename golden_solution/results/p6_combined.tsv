@@ -1,0 +1,6 @@
+source	df	ss	ms	F	P
+site	2	132.82	66.409	228.36	<0.001
+block(site)	9	2.62	0.291	3.80	0.002
+nitrogen	4	188.34	47.085	615.15	<0.001
+site x nitrogen	8	4.64	0.580	7.58	<0.001
+error	36	2.76	0.077	NA	NA
