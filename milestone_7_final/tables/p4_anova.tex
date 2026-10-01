@@ -1,0 +1,20 @@
+% p4_anova.tex -- Paper 4: factorial analysis of variance at each site, read
+% from results/p4_anova.tsv (written by tools/compute_results.py).
+\begin{table}[htbp]
+  \centering\small
+  \caption{Analysis of variance of the change in soil organic carbon (dsoc) and
+    of grain yield at each site: $F$ ratios and $P$ values for the main effects
+    of tillage and residues and their interaction. Each $F$ has 1 and \res{p4-df-error} degrees
+    of freedom.}
+  \label{tab:p4anova}
+  \pgfplotstabletypeset[proctable,
+    columns={site,response,source,F,P},
+    columns/site/.style={column name=Site, column type=l},
+    columns/response/.style={column name=Response, column type=l},
+    columns/source/.style={column name=Source, column type=l},
+    columns/F/.style={column name={$F$}, column type=r},
+    columns/P/.style={column name={$P$}, column type=r},
+    every row no 6/.style={before row=\midrule},
+    every row no 12/.style={before row=\midrule},
+  ]{\subfix{../results/p4_anova.tsv}}
+\end{table}

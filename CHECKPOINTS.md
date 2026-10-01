@@ -204,7 +204,7 @@ Build sequence used for every milestone: `pdflatex main` → `biber main` → `m
 ## M7 — Variants and Documentation
 
 **Status:** Complete
-**Snapshot:** the repository at this commit (variants under `variants/`)
+**Snapshot:** `milestone_7_final/` (variants under `variants/`)
 **Toolchain:** MiKTeX 26.5 (pdfTeX 4.27), biber 2.22, makeindex, Python 3.12 (standard library only)
 
 ### Work completed

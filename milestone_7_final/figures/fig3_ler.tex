@@ -1,0 +1,19 @@
+% fig3_ler.tex -- Paper 3: partial land equivalent ratios, drawn from
+% results/p3_ler.tsv.
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[procfig, ybar stacked, bar width=22pt,
+        symbolic x coords={S1,S2,S3}, xtick=data, ymin=0, ymax=1.6,
+        ylabel={Land equivalent ratio},
+        extra y ticks={1}, extra y tick style={grid style={black, dashed}}]
+      \addplot table[col sep=tab, x=site, y=ler_maize] {\subfix{../results/p3_ler.tsv}};
+      \addplot table[col sep=tab, x=site, y=ler_cowpea] {\subfix{../results/p3_ler.tsv}};
+      \legend{Maize, Cowpea}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Mean partial land equivalent ratios of maize and cowpea at each
+    site. The height of each bar is the total ratio; the dashed line marks a
+    ratio of 1.}
+  \label{fig:p3ler}
+\end{figure}

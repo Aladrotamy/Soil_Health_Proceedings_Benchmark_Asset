@@ -30,7 +30,7 @@ against the data by `tools/check_claims.py`.
 |---|---|
 | `project_source/` | The task's start state: the volume with six planted defects and two decoys |
 | `golden_solution/` | The correct finished volume (compiled `main.pdf` included) |
-| `milestone_1_foundation/` … `milestone_6_verification/` | Snapshot of `project_source/` at the end of each milestone |
+| `milestone_1_foundation/` … `milestone_7_final/` | Snapshot of `project_source/` at the end of each milestone |
 | `tools/` | Data generator, data-rule checker, results engine, claims checker, variant builder, manifest builder |
 | `verifier/` | Verifier, defect definitions, expected-values builder, `expected.json`, oracle and its report |
 | `variants/variant_B/`, `variants/variant_C/` | Two complete variant tasks, each with golden solution, start state, expectations and oracle report |
@@ -91,4 +91,4 @@ byte-identical on Windows and Linux; the fingerprints recorded in
 | M4 Results | results engine, data-driven tables, figures and values | `milestone_4_results/` |
 | M5 Discussion and back matter | discussions, conclusions, abbreviations, index | `milestone_5_discussion/` |
 | M6 Verification layer | golden solution, defects, decoys, verifier, oracle | `milestone_6_verification/` |
-| M7 Variants and documentation | claims checker, variant builder, variants B and C, documents, manifest | (repository root) |
+| M7 Variants and documentation | claims checker, variant builder, variants B and C, documents, manifest | `milestone_7_final/` |

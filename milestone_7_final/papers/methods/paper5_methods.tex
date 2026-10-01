@@ -1,0 +1,39 @@
+% paper5_methods.tex -- Materials and Methods of Paper 5, input by
+% papers/paper5_amendments.tex.
+\section{Materials and Methods}
+
+\subsection{Treatments and design}
+Three organic amendments, cattle manure (MANURE), compost (COMPOST) and
+chopped crop residues (RESIDUE), were compared with an unamended control
+(CTRL). Each amendment supplied the same total amount of carbon,
+\SI{12.0}{\tonne\per\hectare} of carbon over five years, so that differences in
+retention reflect the material rather than the rate. The treatments were
+arranged in randomised complete blocks\index{randomised complete block design} with \res{design-blocks} blocks at each of the three
+sites \parencite{gomez1984}. The data are held in
+\texttt{data/trials/t5\_amendments.tsv}.
+
+\subsection{Carbon stocks}
+Soil organic carbon was determined by wet oxidation\index{soil organic carbon!wet oxidation} in topsoil sampled to a
+depth $d = \SI{0.20}{\metre}$ at the start and end of the trial. Concentrations
+were converted to stocks with the bulk density\index{bulk density} of each site,
+\begin{equation}
+  C = \mathrm{SOC}\times \mathrm{BD}\times d \times 10
+  \quad (\si{\tonne\per\hectare}),
+  \label{eq:stock}
+\end{equation}
+with SOC in \si{\gram\per\kilo\gram}, BD in \si{\gram\per\centi\metre\cubed}
+and $d$ in metres.
+
+\subsection{Carbon retention}
+The change in stock of each plot is
+$\Delta C = C_{\mathrm{final}} - C_{\mathrm{initial}}$. The fraction of the
+added carbon retained in the soil is calculated against the control of the same
+block,
+\begin{equation}
+  f_{\mathrm{ret}} = \frac{\Delta C_{\mathrm{amended}} - \Delta C_{\mathrm{control}}}{C_{\mathrm{added}}},
+  \label{eq:retention}
+\end{equation}
+so that the slow change in carbon that occurs without inputs is removed. Mean
+retention at each site was compared with the clay content of the site, since
+protection by association with fine mineral particles is expected to increase
+with clay \parencite{six2002,vonlutzow2006}.
