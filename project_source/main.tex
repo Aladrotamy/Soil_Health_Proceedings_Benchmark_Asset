@@ -6,6 +6,10 @@
 % the same, so exactly that one message is filtered.
 \usepackage{silence}
 \WarningFilter{latex}{You have requested package `../soilproc'}
+% imakeidx is loaded with noautomatic, because makeindex is run as its own
+% build step; it then always reminds the user to run LaTeX after makeindex.
+% The build sequence above does so, so that one reminder is filtered too.
+\WarningFilter{imakeidx}{Remember to run (pdf)latex again}
 \usepackage{soilproc}
 
 \begin{document}
@@ -26,6 +30,7 @@
 \subfile{papers/paper6_trials}
 
 \backmatter
-% List of abbreviations and subject index are added in later milestones.
+\input{backmatter/abbreviations}
+\printindex
 
 \end{document}

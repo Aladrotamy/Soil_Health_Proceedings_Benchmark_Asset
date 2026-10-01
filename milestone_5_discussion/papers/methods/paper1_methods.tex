@@ -1,0 +1,61 @@
+% paper1_methods.tex -- Materials and Methods of Paper 1, input by
+% papers/paper1_indicators.tex.
+\section{Materials and Methods}
+
+\subsection{Trial and sampling}
+The indicators were measured in a trial comparing three management systems at
+each of the three sites of the trial network: a conventional system with
+tillage and mineral fertiliser only (CONV), a conservation system with reduced
+tillage and retained residues (CONS), and an integrated system combining
+reduced tillage, residues, organic inputs and fertiliser (INTG). The systems
+were arranged in randomised complete block\index{randomised complete block design}s with four blocks per site. Topsoil
+was sampled to a depth of \SI{0.20}{\metre} from every plot. The data are held
+in \texttt{data/trials/t1\_indicators.tsv}.
+
+\subsection{Selection of indicators}
+Candidate indicators were retained only if they met four criteria: they respond
+to management within a few seasons, they relate to at least one soil function,
+they can be measured at moderate cost, and they are not strongly redundant with
+another retained indicator \parencite{andrews2004,bunemann2018}. Six indicators
+met the criteria: soil organic carbon\index{soil organic carbon} (SOC), soil pH, extractable phosphorus
+(P), bulk density\index{bulk density} (BD), water-stable aggregates\index{aggregate stability} (WSA) and microbial biomass
+carbon (MBC). Together they cover chemical, physical and biological properties
+\parencite{doran2000}. Their laboratory methods are listed in
+Table~\ref{tab:scoring}; SOC was determined by wet oxidation
+\parencite{walkley1934} and P with the Mehlich~3 extractant
+\parencite{mehlich1984}.
+
+\input{\subfix{../tables/scoring}}
+
+\subsection{Scoring}
+Each measured value $x$ was converted to a score $s$ between 0 and 1. For an
+indicator where more is better,
+\begin{equation}
+  s = \min\!\left(1,\ \max\!\left(0,\ \frac{x - L}{U - L}\right)\right),
+  \label{eq:more}
+\end{equation}
+and for an indicator where less is better the score is $1 - s$ with the same
+limits. For soil pH, which has an optimum range from $O_1$ to $O_2$, the score
+is 1 inside the range and falls linearly to 0 at $L$ below and $U$ above:
+\begin{equation}
+  s =
+  \begin{cases}
+    0 & x \le L \text{ or } x \ge U,\\[2pt]
+    \dfrac{x - L}{O_1 - L} & L < x < O_1,\\[6pt]
+    1 & O_1 \le x \le O_2,\\[2pt]
+    \dfrac{U - x}{U - O_2} & O_2 < x < U.
+  \end{cases}
+  \label{eq:optimum}
+\end{equation}
+The limits in Table~\ref{tab:scoring} follow the shape of the scoring curves of
+the Soil Management Assessment Framework \parencite{andrews2004}; their values
+were set for this volume and are not calibrated for any real soil.
+
+\subsection{Soil health index}
+The soil health index\index{soil health!index} (SHI) of a plot is the mean of its six indicator scores,
+\begin{equation}
+  \mathrm{SHI} = \frac{1}{n}\sum_{i=1}^{n} s_i, \qquad n = 6,
+  \label{eq:shi}
+\end{equation}
+so that every indicator carries equal weight and the index lies between 0 and
+1. The index of each system was compared between systems within each site.

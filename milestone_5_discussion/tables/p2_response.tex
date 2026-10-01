@@ -1,0 +1,21 @@
+% p2_response.tex -- Paper 2: yield, uptake and nitrogen use efficiency,
+% read from results/p2_response.tsv (written by tools/compute_results.py).
+\begin{table}[htbp]
+  \centering\small
+  \caption{Mean grain yield, nitrogen uptake, agronomic efficiency
+    ($\mathrm{AE}_N$, \si{\kilo\gram} grain per \si{\kilo\gram} N) and apparent
+    recovery efficiency ($\mathrm{RE}_N$) by site and nitrogen rate (four
+    blocks). Efficiencies are not defined for the unfertilised control.}
+  \label{tab:p2response}
+  \pgfplotstabletypeset[proctable,
+    columns={site,n_rate,yield,uptake,ae,re},
+    columns/site/.style={column name=Site, column type=l},
+    columns/n_rate/.style={column name={N (\si{\kilo\gram\per\hectare})}, column type=r},
+    columns/yield/.style={column name={Yield (\si{\tonne\per\hectare})}, column type=r},
+    columns/uptake/.style={column name={Uptake (\si{\kilo\gram\per\hectare})}, column type=r},
+    columns/ae/.style={column name={$\mathrm{AE}_N$}, column type=r},
+    columns/re/.style={column name={$\mathrm{RE}_N$}, column type=r},
+    every row no 5/.style={before row=\midrule},
+    every row no 10/.style={before row=\midrule},
+  ]{\subfix{../results/p2_response.tsv}}
+\end{table}

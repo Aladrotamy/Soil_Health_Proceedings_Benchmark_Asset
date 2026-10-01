@@ -17,7 +17,7 @@ blocks at each site \parencite{gomez1984}. Each block contains every treatment
 of the trial exactly once, and the order of treatments within each block is
 randomised independently. Plots are identified by a code giving the trial,
 site, block and position in the block, and every plot of every trial is listed
-in a single plot register (\texttt{data/trials/plot\_register.tsv}), so that
+in a single plot register\index{plot register} (\texttt{data/trials/plot\_register.tsv}), so that
 each measured value can be traced to its plot.
 
 \subsection{Analysis at one site}
@@ -29,8 +29,8 @@ is described by the model
 \end{equation}
 where $\mu$ is the overall mean, $\tau_i$ the effect of treatment $i$,
 $\beta_j$ the effect of block $j$ and $\varepsilon_{ij}$ the residual error.
-Treatment effects are tested by analysis of variance, and means are compared
-by the least significant difference
+Treatment effects are tested by analysis of variance\index{analysis of variance}, and means are compared
+by the least significant difference\index{least significant difference}
 \begin{equation}
   \mathrm{LSD} = t_{\alpha/2,\,\nu}\sqrt{\frac{2\,\mathrm{MSE}}{r}},
   \label{eq:lsd}

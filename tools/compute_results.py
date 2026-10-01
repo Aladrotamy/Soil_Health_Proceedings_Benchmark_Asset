@@ -168,6 +168,8 @@ def main():
     T = os.path.join(a.data, "trials")
     sites = {r["site"]: r for r in read(os.path.join(a.data, "sites.tsv"))}
     val = {}   # values quoted in the text
+    for s_, r_ in sites.items():
+        val[f"site-clay-{s_}"] = r_["clay_pct"]
 
     # ---------------------------------------------------------- Paper 1
     t1 = read(os.path.join(T, "t1_indicators.tsv"))

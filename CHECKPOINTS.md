@@ -128,3 +128,34 @@ Build sequence used for every milestone: `pdflatex main` → `biber main` → `m
 | C4.13 | Figures drawn by pgfplots from `results/` | exactly 5; 6 curve coefficients read with `\resnum` | PASS (5) |
 | C4.14 | Each paper's tables and figures appear before its references | 6 of 6 | PASS (6/6) |
 | C4.15 | Text files stored with LF line endings | 0 CRLF files | PASS (0) |
+
+
+## M5 — Discussion, Abbreviations and Index
+
+**Status:** Complete
+**Snapshot:** `milestone_5_discussion/`
+**Toolchain:** MiKTeX 26.5 (pdfTeX 4.27), biber 2.22, makeindex, Python 3.12
+
+### Work completed
+- Added a Discussion and a Conclusion to each paper, as separate files in `papers/discussion/`. Each discussion interprets its results against the literature already cited in the volume and states its limitations (for example, texture confounded with climate across the three sites of Paper 5); no new references were added. Each conclusion restates its key results through `\res`, so they remain traceable to the data.
+- Corrected a draft claim that the semi-arid site was the warmest (the data show the humid tropical site is warmer; the text now says "driest"), and replaced the clay percentages typed in Paper 5 with values from `data/sites.tsv` (`\res{site-clay-…}`).
+- Added the List of Abbreviations (`backmatter/abbreviations.tex`, 17 entries) and a subject index built with makeindex: 43 `\index` commands for 29 distinct entries, including sub-entries.
+- Filtered the reminder that imakeidx always prints when loaded with `noautomatic` (the build sequence runs makeindex as its own step); the filter is documented in `main.tex`.
+- Tested on Overleaf (pdfLaTeX, TeX Live 2026). The free plan stopped both the full volume and a single paper with a compile timeout before a PDF was produced, reporting 0 errors and 0 warnings up to that point. A full Overleaf compile is pending access to an account with a longer compile limit (check C5.13).
+
+### Pass/fail checks
+| ID | Check | Threshold | Result |
+|---|---|---|---|
+| C5.1 | Full build of `main.tex` completes | 0 errors; biber and makeindex exit normally | PASS |
+| C5.2 | Warnings and bad boxes in `main.log` | exactly 0 matches for `^!`, `Warning:`, `Overfull`, `Underfull`; exactly 2 documented warning filters in `main.tex` | PASS (0) |
+| C5.3 | Compiled page count of the volume | exactly 41 | PASS (41) |
+| C5.4 | Each paper typeset on its own | 6 of 6 with 0 issues; pages 5, 5, 4, 5, 4, 4 | PASS (6/6) |
+| C5.5 | Discussion files in `papers/discussion/`, each input once by its paper | exactly 6; each contains one Discussion and one Conclusion section | PASS (6) |
+| C5.6 | Every conclusion quotes its key results from `values.tex` | 6 of 6 conclusions use `\res`; 119 `\res` uses in the papers in total | PASS |
+| C5.7 | References | still exactly 18 cited keys, all defined in `bib/soilhealth.bib`; 0 new references | PASS (18) |
+| C5.8 | List of Abbreviations | exactly 17 entries; each abbreviation appears in the text, tables or figures | PASS (17/17) |
+| C5.9 | Subject index | 43 `\index` commands, 29 distinct entries; makeindex reports 0 warnings | PASS |
+| C5.10 | Reproducibility of the computed values | `values.tex` SHA-256 prefix `d607777b1569` identical on Linux and Windows | PASS |
+| C5.11 | Undefined result values | 0 occurrences of "??" in the PDF | PASS (0) |
+| C5.12 | Text files stored with LF line endings | 0 CRLF files | PASS (0) |
+| C5.13 | Full compile on Overleaf | PDF produced with 0 errors | OPEN — free-plan timeout; awaiting an account with a longer compile limit |
