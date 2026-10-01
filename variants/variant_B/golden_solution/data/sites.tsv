@@ -1,0 +1,4 @@
+site	zone	clay_pct	silt_pct	sand_pct	ph_initial	soc_initial_gkg	bulk_density_gcm3	rainfall_mm	temperature_c
+S1	temperate	28	40	32	6.4	18.0	1.32	780	10.5
+S2	semi-arid	14	22	64	7.6	7.5	1.48	480	24.0
+S3	humid tropical	36	24	40	5.4	14.0	1.25	1450	26.5

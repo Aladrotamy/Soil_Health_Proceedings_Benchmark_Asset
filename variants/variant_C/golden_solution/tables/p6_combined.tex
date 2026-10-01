@@ -1,0 +1,18 @@
+% p6_combined.tex -- Paper 6: combined analysis of variance of maize yield in
+% the nitrogen trial, read from results/p6_combined.tsv.
+\begin{table}[htbp]
+  \centering\small
+  \caption{Combined analysis of variance of maize grain yield in the nitrogen
+    rate trial across the three sites. Sites are tested against blocks within
+    sites; nitrogen and the site by nitrogen interaction against the residual.}
+  \label{tab:p6combined}
+  \pgfplotstabletypeset[proctable,
+    columns={source,df,ss,ms,F,P},
+    columns/source/.style={column name=Source, column type=l},
+    columns/df/.style={column name=df, column type=r},
+    columns/ss/.style={column name={Sum of squares}, column type=r},
+    columns/ms/.style={column name={Mean square}, column type=r},
+    columns/F/.style={column name={$F$}, column type=r},
+    columns/P/.style={column name={$P$}, column type=r},
+  ]{\subfix{../results/p6_combined.tsv}}
+\end{table}

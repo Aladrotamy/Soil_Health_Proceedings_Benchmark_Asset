@@ -1,0 +1,18 @@
+% fig1_shi.tex -- Paper 1: soil health index by system and site, drawn from
+% results/fig1_shi.tsv when the volume is typeset.
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[procfig, ybar, bar width=9pt,
+        symbolic x coords={CONV,CONS,INTG}, xtick=data,
+        ymin=0, ymax=1, ylabel={Soil health index},
+]
+      \addplot table[col sep=tab, x=system, y=S1] {\subfix{../results/fig1_shi.tsv}};
+      \addplot table[col sep=tab, x=system, y=S2] {\subfix{../results/fig1_shi.tsv}};
+      \addplot table[col sep=tab, x=system, y=S3] {\subfix{../results/fig1_shi.tsv}};
+      \legend{S1, S2, S3}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Mean soil health index of the three management systems at each site.}
+  \label{fig:p1shi}
+\end{figure}

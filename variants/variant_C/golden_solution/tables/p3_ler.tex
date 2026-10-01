@@ -1,0 +1,18 @@
+% p3_ler.tex -- Paper 3: land equivalent ratios, read from
+% results/p3_ler.tsv (written by tools/compute_results.py).
+\begin{table}[htbp]
+  \centering\small
+  \caption{Mean partial land equivalent ratios of maize and cowpea, mean total
+    land equivalent ratio (LER), and the lowest and highest block values of the
+    total ratio at each site (\res{design-blocks} blocks).}
+  \label{tab:p3ler}
+  \pgfplotstabletypeset[proctable,
+    columns={site,ler_maize,ler_cowpea,ler_total,ler_min,ler_max},
+    columns/site/.style={column name=Site, column type=l},
+    columns/ler_maize/.style={column name={$\mathrm{LER}_m$}, column type=r},
+    columns/ler_cowpea/.style={column name={$\mathrm{LER}_c$}, column type=r},
+    columns/ler_total/.style={column name=LER, column type=r},
+    columns/ler_min/.style={column name={Lowest}, column type=r},
+    columns/ler_max/.style={column name={Highest}, column type=r},
+  ]{\subfix{../results/p3_ler.tsv}}
+\end{table}

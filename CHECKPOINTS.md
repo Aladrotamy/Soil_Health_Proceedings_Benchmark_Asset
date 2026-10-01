@@ -199,3 +199,34 @@ Build sequence used for every milestone: `pdflatex main` → `biber main` → `m
 | C6.9 | Oracle on both systems | 21 of 21 cases meet their requirement on Linux and on Windows, with identical scores | PASS (21/21) |
 | C6.10 | Data rules on golden and start state | 14 of 14 pass on both | PASS |
 | C6.11 | Text files stored with LF line endings | 0 CRLF files | PASS (0) |
+
+
+## M7 — Variants and Documentation
+
+**Status:** Complete
+**Snapshot:** the repository at this commit (variants under `variants/`)
+**Toolchain:** MiKTeX 26.5 (pdfTeX 4.27), biber 2.22, makeindex, Python 3.12 (standard library only)
+
+### Work completed
+- Added `tools/check_claims.py`, which encodes the 25 qualitative statements of the text as tests on the computed results. It found one overstated sentence in Paper 2 ("recovery followed the same pattern"), now corrected to what the data support.
+- Replaced 17 places where the text assumed four blocks with values from the data (`\res{design-blocks}`, `\res{p1-df-error}`, `\res{p4-df-error}`), and moved an index command that sat inside the word "blocks".
+- Defined the six defects once in `verifier/defects.py`; the seeded value of D4 is derived from the data (computed value − 0.05). The verifier, expected-values builder and oracle now accept a variant's paths. Because the wording changes altered file fingerprints, `verifier/expected.json` was rebuilt: SHA-256 prefix `f9268cdb9f60` (M6: `fac1755afcaf`).
+- Added `tools/make_variant.py` and built two complete variants, each accepted only if its data obey all 14 rules and all 25 claims, its golden solution compiles with 0 warnings, its start state scores 0, its golden solution scores 1 and its oracle passes all 21 cases.
+- Added `README.md`, `ASSET.md` (with a complete room-to-vary table and a direct link to the data rules), `task_brief.md`, `verifiers_spec.md`, `reference_results.md`, `SOURCES.md`, `TASK_CATALOGUE.md` (30 tasks in three registers), `requirements.pdf` (from `docs/requirements.tex`), and `tools/make_manifest.py` with `MANIFEST.sha256`.
+
+### Pass/fail checks
+| ID | Check | Threshold | Result |
+|---|---|---|---|
+| C7.1 | Text claims on the main data | 25 of 25 hold | PASS (25/25) |
+| C7.2 | Main asset after the wording changes | golden 0 issues, 41 pages; start state score 0.0000; golden score 1.0000; oracle 21 of 21 | PASS |
+| C7.3 | `verifier/expected.json` reproducible | SHA-256 prefix `f9268cdb9f60` identical on Linux and Windows | PASS |
+| C7.4 | Variant B (seed 118, 5 blocks, 285 plots) | 14 of 14 rules; 25 of 25 claims; golden 0 issues, 41 pages; start state 0, golden 1; oracle 21 of 21 | PASS |
+| C7.5 | Variant C (US letter, 12 pt, one-sided) | golden 0 issues, 37 pages; D1 still overflows; start state 0, golden 1; oracle 21 of 21 | PASS |
+| C7.6 | Variants reproducible | `expected.json` prefixes identical on Linux and Windows: B `0528a7b89047`, C `b514d8fd90d5` | PASS (2/2) |
+| C7.7 | D4 follows the data | variant B: computed 1.34, seeded 1.29; main and variant C: computed 1.37, seeded 1.32 | PASS |
+| C7.8 | Seed acceptance is selective | of 400 seeds tried with 5 blocks, the first to satisfy all rules and claims is 118 | PASS |
+| C7.9 | Required documents present | `requirements.pdf`, `task_brief.md`, `verifiers_spec.md`, `reference_results.md`, `ASSET.md`, `README.md`, `SOURCES.md`, `TASK_CATALOGUE.md` | PASS (8/8) |
+| C7.10 | `requirements.pdf` builds | 0 errors, 0 warnings, 0 overfull boxes; 2 pages | PASS |
+| C7.11 | `SOURCES.md` covers the bibliography | 18 of 18 entries, each with its verification record and the papers that cite it | PASS (18/18) |
+| C7.12 | Manifest | `python tools/make_manifest.py --check`: every file matches, 0 unlisted | PASS |
+| C7.13 | Text files stored with LF line endings | 0 CRLF files | PASS (0) |

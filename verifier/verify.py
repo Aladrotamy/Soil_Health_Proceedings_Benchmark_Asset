@@ -7,6 +7,8 @@ from golden_solution/ by verifier/build_expected.py.
 
     python verifier/verify.py project_source            # report
     python verifier/verify.py project_source --json     # machine-readable
+    python verifier/verify.py variants/variant_B/project_source \
+        --expected variants/variant_B/verifier/expected.json
 
 Score = gate x (sum of weights of fixed defects) / (sum of all weights).
 The gate is 0 if the project fails to compile or any integrity check fails,
@@ -147,8 +149,9 @@ def verify(root, exp):
     val = m.group(1) if m else ""
     target = float(exp["values"]["p3-ler-S3"])
     okv = val == "\\res{p3-ler-S3}" or (val[:1].isdigit() and abs(float(val) - target) <= 0.005)
+    wrong = exp["values"]["p3-ler-S3-wrong"]
     d["D4"] = [check(f"S3 ratio in the conclusion equals the computed value {target:.2f} (tolerance 0.005)", okv, val),
-               check("the wrong value 1.32 is gone from the conclusion", "1.32" not in concl)]
+               check(f"the wrong value {wrong} is gone from the conclusion", wrong not in concl)]
     items = [l for l in ind.splitlines() if re.match(r"\s*\\item\s", l)]
     soc = [l for l in items if re.match(r"\s*\\item\s+soil organic carbon,", l, re.I)]
     d["D5"] = [check("exactly one top-level index entry for soil organic carbon", len(soc) == 1, str(len(soc))),

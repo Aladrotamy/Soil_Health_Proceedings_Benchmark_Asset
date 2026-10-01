@@ -1,0 +1,68 @@
+% requirements.tex -- source of requirements.pdf.
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage{enumitem}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\setlist{itemsep=2pt}
+\begin{document}
+\begin{center}
+  {\Large\bfseries Benchmark Requirements}\\[4pt]
+  Domain: Overleaf / \LaTeX{} (academic authoring)\\
+  Asset: Soil Health Proceedings --- Owner: Rotimi Alade
+\end{center}
+
+\section*{Task}
+Prepare the \emph{Proceedings of the International Symposium on Soil Health and
+Sustainable Crop Production, Volume~1} for publication by resolving the six
+editor's queries recorded in \path{notes/review_log.md}, working only in the
+Overleaf editor.
+
+\section*{Required project content}
+\begin{itemize}
+  \item A proceedings volume with front matter, six contributed papers and back
+    matter (List of Abbreviations and subject index).
+  \item Each paper with title, abstract, keywords, introduction, materials and
+    methods, results, discussion, conclusion and its own reference list.
+  \item A synthetic, seeded dataset of 228 plots in five field trials at three
+    sites, obeying 14 written data rules.
+  \item Every table, figure and quoted number derived from the data through the
+    results files; 25 qualitative statements consistent with the data.
+  \item 18 references to published literature, each verified before use.
+\end{itemize}
+
+\section*{\LaTeX{} requirements}
+\begin{itemize}
+  \item The project remains editable \LaTeX{} source.
+  \item Papers are connected to \path{main.tex} with \path{subfiles}; each
+    also compiles on its own.
+  \item The volume compiles with pdf\LaTeX{}, biber and makeindex with 0 errors,
+    0 warnings and 0 overfull or underfull boxes.
+  \item Existing references are used consistently; no references are added.
+\end{itemize}
+
+\section*{Acceptance thresholds}
+\begin{itemize}
+  \item Verifier score exactly 1.0000 (\path{verifier/verify.py}): all six
+    defects fixed and all seven gate checks passed.
+  \item Page count 40--42; 64 untouched files identical to the golden solution.
+  \item Land equivalent ratio of S3 in the Paper~3 conclusion equal to the
+    computed 1.37 within $\pm 0.005$.
+  \item All 9 columns of the sites table kept; no warning suppressed.
+  \item Decoys \path{data/archive/t2_nitrogen_2025_export.tsv} and
+    \path{bib/soilhealth_draft.bib} unchanged and unused.
+\end{itemize}
+
+\section*{Expected final state}
+The compiled volume of \path{golden_solution/}, with the milestone history
+kept in \path{milestone_1_foundation/} to
+\path{milestone_6_verification/} and \path{CHECKPOINTS.md}.
+
+\medskip
+\noindent\textbf{Important:} the symposium is fictional and the dataset and
+results are synthetic and demonstrative. They must not be presented as evidence
+about real soils, crops or farming systems.
+\end{document}

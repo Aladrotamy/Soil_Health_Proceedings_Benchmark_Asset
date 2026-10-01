@@ -12,6 +12,7 @@ with its required outcome:
   5. adversarial  wrong or shortcut submissions score below 1 (most score 0)
 
     python verifier/run_oracle.py          # writes verifier/oracle_report.txt
+    python verifier/run_oracle.py --root variants/variant_B   # a variant
 
 Exits with status 1 if any outcome differs from its requirement.
 """
@@ -26,8 +27,7 @@ ROOT = os.path.join(HERE, "..")
 sys.path.insert(0, HERE)
 from verify import verify  # noqa: E402
 
-SEED = os.path.join(ROOT, "project_source")
-GOLD = os.path.join(ROOT, "golden_solution")
+SEED = GOLD = None   # set in main() from --root
 DEFECT_FILES = {"D1": "tables/sites.tex", "D2": "papers/discussion/paper4_discussion.tex",
                 "D3": "papers/results/paper3_results.tex", "D4": "papers/discussion/paper3_discussion.tex",
                 "D5": "papers/paper4_tillage.tex", "D6": "backmatter/abbreviations.tex"}
@@ -55,48 +55,61 @@ def state(fixed, edits=None):
 
 
 ALL = ["D1", "D2", "D3", "D4", "D5", "D6"]
-GOLD_SITES = "  \\centering\\footnotesize\n  \\setlength{\\tabcolsep}{4pt}\n"
 SEED_SITES = "  \\centering\\small\n"
-CASES = [
-    # name, fixed defects, edits, requirement
-    ("null: untouched start state", [], None, "== 0"),
-    ("golden: golden solution files", ALL, None, "== 1"),
-    ("prefix 1: D1", ["D1"], None, "monotone"),
-    ("prefix 2: D1-D2", ALL[:2], None, "monotone"),
-    ("prefix 3: D1-D3", ALL[:3], None, "monotone"),
-    ("prefix 4: D1-D4", ALL[:4], None, "monotone"),
-    ("prefix 5: D1-D5", ALL[:5], None, "monotone"),
-    ("alt D1: \\resizebox to the text width", ALL[1:], {"tables/sites.tex": (
-        "  \\pgfplotstabletypeset[", "  \\resizebox{\\linewidth}{!}{\\pgfplotstabletypeset[")}, "== 1*"),
-    ("alt D1: narrower column separation only", ALL[1:], {"tables/sites.tex": (
-        SEED_SITES, "  \\centering\\small\n  \\setlength{\\tabcolsep}{2pt}\n")}, "== 1"),
-    ("alt D1: smaller font only", ALL[1:], {"tables/sites.tex": (
-        SEED_SITES, "  \\centering\\scriptsize\n")}, "== 1"),
-    ("alt D4: correct value typed as 1.37", ["D1", "D2", "D3", "D5", "D6"], {
-        "papers/discussion/paper3_discussion.tex": ("1.32. Maize", "1.37. Maize")}, "== 1"),
-    ("adv drop_last: every fix except D6", ALL[:5], None, "< 1"),
-    ("adv drop_columns: table fitted by deleting columns", ALL[1:], {"tables/sites.tex": (
-        "columns={site,zone,clay_pct,sand_pct,ph_initial,", "columns={site,zone,clay_pct,ph_initial,")}, "< 1"),
-    ("adv hide_overflow: \\hfuzz instead of a fix", ALL[1:], {"tables/sites.tex": (
-        SEED_SITES, "  \\centering\\small\\hfuzz=60pt\n")}, "== 0"),
-    ("adv bib_edit: rename the .bib key to pittelkow2016", ["D1", "D3", "D4", "D5", "D6"], {
-        "bib/soilhealth.bib": ("@article{pittelkow2015,", "@article{pittelkow2016,")}, "== 0"),
-    ("adv label_edit: rename the table label to tab:p3LER", ["D1", "D2", "D4", "D5", "D6"], {
-        "tables/p3_ler.tex": ("\\label{tab:p3ler}", "\\label{tab:p3LER}")}, "== 0"),
-    ("adv decoy_edit: change the archived export", ALL, {
-        "data/archive/t2_nitrogen_2025_export.tsv": (None, "T2-S9-B9-P99\tS9\t9\t0\t0.00\t0.0\n")}, "== 0"),
-    ("adv decoy_cite: wrong value 1.32 kept, draft bibliography named", ["D1", "D2", "D3", "D5", "D6"], {
-        "papers/discussion/paper3_discussion.tex": ("1.32. Maize", "1.32 (see bib/soilhealth_draft.bib). Maize")}, "== 0"),
-    ("adv index_delete: delete the capitalised index entry", ["D1", "D2", "D3", "D4", "D6"], {
-        "papers/paper4_tillage.tex": ("\\index{Soil organic carbon}", "")}, "< 1"),
-    ("adv paste_instruction: queries pasted after \\end{document}", ALL, {
-        "main.tex": (None, "\nQ1 table of sites runs past the margin. Q4 land equivalent ratio 1.37.\n")}, "== 0"),
-    ("adv add_file: fixes placed in a new file", ALL, {
-        "papers/fixes.tex": (None, "% fixes\n")}, "== 0"),
-]
+
+
+def cases(correct, wrong):
+    return [
+        # name, fixed defects, edits, requirement
+        ("null: untouched start state", [], None, "== 0"),
+        ("golden: golden solution files", ALL, None, "== 1"),
+        ("prefix 1: D1", ["D1"], None, "monotone"),
+        ("prefix 2: D1-D2", ALL[:2], None, "monotone"),
+        ("prefix 3: D1-D3", ALL[:3], None, "monotone"),
+        ("prefix 4: D1-D4", ALL[:4], None, "monotone"),
+        ("prefix 5: D1-D5", ALL[:5], None, "monotone"),
+        ("alt D1: \\resizebox to the text width", ALL[1:], {"tables/sites.tex": (
+            "  \\pgfplotstabletypeset[", "  \\resizebox{\\linewidth}{!}{\\pgfplotstabletypeset[")}, "== 1*"),
+        ("alt D1: narrower column separation only", ALL[1:], {"tables/sites.tex": (
+            SEED_SITES, "  \\centering\\small\n  \\setlength{\\tabcolsep}{2pt}\n")}, "== 1"),
+        ("alt D1: smaller font only", ALL[1:], {"tables/sites.tex": (
+            SEED_SITES, "  \\centering\\scriptsize\n")}, "== 1"),
+        (f"alt D4: correct value typed as {correct}", ["D1", "D2", "D3", "D5", "D6"], {
+            "papers/discussion/paper3_discussion.tex": (f"{wrong}. Maize", f"{correct}. Maize")}, "== 1"),
+        ("adv drop_last: every fix except D6", ALL[:5], None, "< 1"),
+        ("adv drop_columns: table fitted by deleting columns", ALL[1:], {"tables/sites.tex": (
+            "columns={site,zone,clay_pct,sand_pct,ph_initial,", "columns={site,zone,clay_pct,ph_initial,")}, "< 1"),
+        ("adv hide_overflow: \\hfuzz instead of a fix", ALL[1:], {"tables/sites.tex": (
+            SEED_SITES, "  \\centering\\small\\hfuzz=60pt\n")}, "== 0"),
+        ("adv bib_edit: rename the .bib key to pittelkow2016", ["D1", "D3", "D4", "D5", "D6"], {
+            "bib/soilhealth.bib": ("@article{pittelkow2015,", "@article{pittelkow2016,")}, "== 0"),
+        ("adv label_edit: rename the table label to tab:p3LER", ["D1", "D2", "D4", "D5", "D6"], {
+            "tables/p3_ler.tex": ("\\label{tab:p3ler}", "\\label{tab:p3LER}")}, "== 0"),
+        ("adv decoy_edit: change the archived export", ALL, {
+            "data/archive/t2_nitrogen_2025_export.tsv": (None, "T2-S9-B9-P99\tS9\t9\t0\t0.00\t0.0\n")}, "== 0"),
+        (f"adv decoy_cite: wrong value {wrong} kept, draft bibliography named", ["D1", "D2", "D3", "D5", "D6"], {
+            "papers/discussion/paper3_discussion.tex": (f"{wrong}. Maize", f"{wrong} (see bib/soilhealth_draft.bib). Maize")}, "== 0"),
+        ("adv index_delete: delete the capitalised index entry", ["D1", "D2", "D3", "D4", "D6"], {
+            "papers/paper4_tillage.tex": ("\\index{Soil organic carbon}", "")}, "< 1"),
+        ("adv paste_instruction: queries pasted after \\end{document}", ALL, {
+            "main.tex": (None, "\nQ1 table of sites runs past the margin. Q4 land equivalent ratio.\n")}, "== 0"),
+        ("adv add_file: fixes placed in a new file", ALL, {
+            "papers/fixes.tex": (None, "% fixes\n")}, "== 0"),
+    ]
 
 
 def main():
+    import argparse
+    global SEED, GOLD
+    ap = argparse.ArgumentParser(description="Run the oracle on the asset or on a variant.")
+    ap.add_argument("--root", default=ROOT, help="folder holding project_source/ and golden_solution/")
+    ap.add_argument("--expected", default=None, help="default: <root>/verifier/expected.json")
+    a = ap.parse_args()
+    SEED, GOLD = os.path.join(a.root, "project_source"), os.path.join(a.root, "golden_solution")
+    exp_path = a.expected or os.path.join(a.root, "verifier", "expected.json")
+    exp = json.load(open(exp_path, encoding="utf-8"))
+    correct, wrong = exp["values"]["p3-ler-S3"], exp["values"]["p3-ler-S3-wrong"]
+    CASES = cases(correct, wrong)
     rows, fails, prev = [], 0, -1.0
     for name, fixed, edits, req in CASES:
         tmp, work = state(fixed, edits)
@@ -106,7 +119,7 @@ def main():
             s = open(p, encoding="utf-8").read().replace("{\\subfix{../data/sites.tsv}}", "{\\subfix{../data/sites.tsv}}}", 1)
             open(p, "w", encoding="utf-8", newline="\n").write(s)
             req = "== 1"
-        r = verify(work, json.load(open(os.path.join(HERE, "expected.json"), encoding="utf-8")))
+        r = verify(work, exp)
         shutil.rmtree(tmp, ignore_errors=True)
         sc = r["score"]
         if req == "== 0":
@@ -125,7 +138,7 @@ def main():
         print(rows[-1], flush=True)
     rows.append(f"{len(CASES) - fails} of {len(CASES)} oracle cases meet their requirement")
     print(rows[-1])
-    with open(os.path.join(HERE, "oracle_report.txt"), "w", encoding="utf-8", newline="\n") as f:
+    with open(os.path.join(os.path.dirname(exp_path), "oracle_report.txt"), "w", encoding="utf-8", newline="\n") as f:
         f.write("Oracle report -- python verifier/run_oracle.py\n")
         f.write("columns: result, score, requirement, gate, defects fixed, case\n\n")
         f.write("\n".join(rows) + "\n")

@@ -1,0 +1,25 @@
+Oracle report -- python verifier/run_oracle.py
+columns: result, score, requirement, gate, defects fixed, case
+
+PASS  0.0000  req == 0      gate ok    fixed -       null: untouched start state
+PASS  1.0000  req == 1      gate ok    fixed 123456  golden: golden solution files
+PASS  0.1905  req monotone  gate ok    fixed 1       prefix 1: D1
+PASS  0.3810  req monotone  gate ok    fixed 12      prefix 2: D1-D2
+PASS  0.5714  req monotone  gate ok    fixed 123     prefix 3: D1-D3
+PASS  0.7619  req monotone  gate ok    fixed 1234    prefix 4: D1-D4
+PASS  0.9048  req monotone  gate ok    fixed 12345   prefix 5: D1-D5
+PASS  1.0000  req == 1      gate ok    fixed 123456  alt D1: \resizebox to the text width
+PASS  1.0000  req == 1      gate ok    fixed 123456  alt D1: narrower column separation only
+PASS  1.0000  req == 1      gate ok    fixed 123456  alt D1: smaller font only
+PASS  1.0000  req == 1      gate ok    fixed 123456  alt D4: correct value typed as 1.37
+PASS  0.9048  req < 1       gate ok    fixed 12345   adv drop_last: every fix except D6
+PASS  0.8095  req < 1       gate ok    fixed 23456   adv drop_columns: table fitted by deleting columns
+PASS  0.0000  req == 0      gate FAIL  fixed 123456  adv hide_overflow: \hfuzz instead of a fix
+PASS  0.0000  req == 0      gate FAIL  fixed 13456   adv bib_edit: rename the .bib key to pittelkow2016
+PASS  0.0000  req == 0      gate FAIL  fixed 12456   adv label_edit: rename the table label to tab:p3LER
+PASS  0.0000  req == 0      gate FAIL  fixed 123456  adv decoy_edit: change the archived export
+PASS  0.0000  req == 0      gate FAIL  fixed 2356    adv decoy_cite: wrong value 1.32 kept, draft bibliography named
+PASS  0.8571  req < 1       gate ok    fixed 12346   adv index_delete: delete the capitalised index entry
+PASS  0.0000  req == 0      gate FAIL  fixed 123456  adv paste_instruction: queries pasted after \end{document}
+PASS  0.0000  req == 0      gate FAIL  fixed 123456  adv add_file: fixes placed in a new file
+21 of 21 oracle cases meet their requirement

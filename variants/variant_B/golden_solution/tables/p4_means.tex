@@ -1,0 +1,20 @@
+% p4_means.tex -- Paper 4: mean SOC change and yield, read from
+% results/p4_means.tsv (written by tools/compute_results.py).
+\begin{table}[htbp]
+  \centering\small
+  \caption{Mean change in soil organic carbon ($\Delta$SOC,
+    \si{\gram\per\kilo\gram}) over five years and final-year grain yield
+    (\si{\tonne\per\hectare}) by site, tillage (CT conventional, NT no-till) and
+    residue treatment (R0 removed, R1 retained); \res{design-blocks} blocks.}
+  \label{tab:p4means}
+  \pgfplotstabletypeset[proctable,
+    columns={site,tillage,residue,dsoc,yield},
+    columns/site/.style={column name=Site, column type=l},
+    columns/tillage/.style={column name=Tillage, column type=l},
+    columns/residue/.style={column name=Residue, column type=l},
+    columns/dsoc/.style={column name={$\Delta$SOC}, column type=r},
+    columns/yield/.style={column name=Yield, column type=r},
+    every row no 4/.style={before row=\midrule},
+    every row no 8/.style={before row=\midrule},
+  ]{\subfix{../results/p4_means.tsv}}
+\end{table}

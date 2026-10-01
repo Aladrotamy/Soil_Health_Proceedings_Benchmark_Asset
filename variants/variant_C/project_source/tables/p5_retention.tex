@@ -1,0 +1,18 @@
+% p5_retention.tex -- Paper 5: carbon retention by site and amendment, read
+% from results/fig5_retention.tsv (written by tools/compute_results.py).
+\begin{table}[htbp]
+  \centering\small
+  \caption{Mean fraction of added carbon retained in the topsoil after five
+    years, by site and amendment (\res{design-blocks} blocks), with the clay content of each
+    site. Sites are ordered by clay content.}
+  \label{tab:p5retention}
+  \pgfplotstabletypeset[proctable,
+    columns={site,clay,MANURE,COMPOST,RESIDUE,mean},
+    columns/site/.style={column name=Site, column type=l},
+    columns/clay/.style={column name={Clay (\%)}, column type=r},
+    columns/MANURE/.style={column name=Manure, column type=r},
+    columns/COMPOST/.style={column name=Compost, column type=r},
+    columns/RESIDUE/.style={column name=Residue, column type=r},
+    columns/mean/.style={column name=Mean, column type=r},
+  ]{\subfix{../results/fig5_retention.tsv}}
+\end{table}

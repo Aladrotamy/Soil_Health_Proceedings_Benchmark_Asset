@@ -170,6 +170,11 @@ def main():
     val = {}   # values quoted in the text
     for s_, r_ in sites.items():
         val[f"site-clay-{s_}"] = r_["clay_pct"]
+    nblk = len({r["block"] for r in read(os.path.join(T, "plot_register.tsv"))})
+    words = {2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight"}
+    val["design-blocks"] = words.get(nblk, str(nblk))
+    val["p1-df-error"] = str(2 * (nblk - 1))
+    val["p4-df-error"] = str(3 * (nblk - 1))
 
     # ---------------------------------------------------------- Paper 1
     t1 = read(os.path.join(T, "t1_indicators.tsv"))

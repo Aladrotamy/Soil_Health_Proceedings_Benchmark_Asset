@@ -1,0 +1,37 @@
+% paper4_results.tex -- Results of Paper 4, input by papers/paper4_tillage.tex.
+% Every number is quoted from results/values.tex with \res{...}.
+\section{Results}
+
+\subsection{Soil organic carbon}
+Over five years, topsoil organic carbon declined under conventional tillage
+with residues removed and increased under every other combination
+(Table~\ref{tab:p4means}, Figure~\ref{fig:p4dsoc}). The largest gains were
+under no-till with residues retained: \res{p4-dsoc-S1-NTR1},
+\res{p4-dsoc-S2-NTR1} and \res{p4-dsoc-S3-NTR1}~\si{\gram\per\kilo\gram} at S1,
+S2 and S3, against \res{p4-dsoc-S1-CTR0}, \res{p4-dsoc-S2-CTR0} and
+\res{p4-dsoc-S3-CTR0}~\si{\gram\per\kilo\gram} under conventional tillage with
+residues removed. Both main effects were significant at every site
+(Table~\ref{tab:p4anova}). The interaction was significant at S1
+($F=\res{p4-dsoc-interaction-F-S1}$, \res{p4-dsoc-interaction-P-S1}) and S3
+($F=\res{p4-dsoc-interaction-F-S3}$, \res{p4-dsoc-interaction-P-S3}), where
+no-till gained more carbon when residues were retained, but not at the
+semi-arid site S2 ($F=\res{p4-dsoc-interaction-F-S2}$,
+\res{p4-dsoc-interaction-P-S2}).
+
+\input{\subfix{../tables/p4_means}}
+\input{\subfix{../figures/fig4_dsoc}}
+
+\subsection{Grain yield}
+Yield responded differently from carbon. At the temperate site S1, no-till
+reduced yield ($F=\res{p4-yield-tillage-F-S1}$, \res{p4-yield-tillage-P-S1}),
+most clearly when residues were removed (\res{p4-yield-S1-NTR0} against
+\res{p4-yield-S1-CTR0}~\si{\tonne\per\hectare}). At the semi-arid site S2 the
+effect of tillage depended on residues (interaction
+$F=\res{p4-yield-interaction-F-S2}$, \res{p4-yield-interaction-P-S2}): no-till
+with residues retained gave the highest yield of the four combinations,
+\res{p4-yield-S2-NTR1}~\si{\tonne\per\hectare}, and no-till with residues
+removed the lowest, \res{p4-yield-S2-NTR0}~\si{\tonne\per\hectare}. At the humid
+tropical site S3 neither factor affected yield significantly
+(tillage \res{p4-yield-tillage-P-S3}; residues \res{p4-yield-residue-P-S3}).
+
+\input{\subfix{../tables/p4_anova}}
